@@ -1,6 +1,4 @@
-[EN]
-
-# TweenGen
+# [EN] TweenGen
 Inbetween frames generator for animation.
 
 -- ABOUT --
@@ -11,9 +9,7 @@ TweenGen is a personnal inbetween frame generator to be used for animation proje
 
 This program isn't ready for use.
 
-[FR]
-
-# TweenGen
+# [FR] TweenGen
 Générateur d'images transitoires pour l'animation.
 
 -- A PROPOS --
