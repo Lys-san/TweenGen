@@ -16,12 +16,12 @@
 
 	/* Control points color */
 	#define CRT_FRAME_PT_COLOR MLV_COLOR_BLACK
-	#define PVS_FRAME_PT_COLOR MLV_COLOR_PURPLE
+	#define PVS_FRAME_PT_COLOR MLV_COLOR_DARK_SLATE_BLUE
 	#define NXT_FRAME_PT_COLOR MLV_COLOR_GREEN
 
 	/* Bones color */
 	#define CRT_FRAME_LN_COLOR MLV_COLOR_BLACK
-	#define PVS_FRAME_LN_COLOR MLV_COLOR_DARK_PURPLE
+	#define PVS_FRAME_LN_COLOR MLV_COLOR_PURPLE4
 	#define NXT_FRAME_LN_COLOR MLV_COLOR_DARK_GREEN
 	
 	/* Dimensions */
@@ -33,18 +33,24 @@
 		TOOL,
 		MENU,
 		CANVAS
-	} POSITION;
+	} Position;
 
 	typedef enum {
 		EDIT_CTRL_POINTS
-	} TOOLBAR;
+	} Toolbar;
+
+	typedef enum {
+		CRT_FRAME, /* current frame */
+		PVS_FRAME, /* previous frame */
+		NXT_FRAME  /* next frame */
+	} FramePos;
 
 	/** Opens the TweenGen window and stores the dimensions of the created
 	 *  window. */
 	void createWindow(unsigned int *windowWidth, unsigned int *windowHeight);
 
 	/** Drawing of the interface (buttons etc...) */
-	void drawInterface(unsigned int windowWidth, unsigned int windowHeight);
+	void drawInterface(unsigned int windowWidth, unsigned int windowHeight, unsigned int frame);
 
 	/** Closes the current window. */
 	void closeWindow();
@@ -52,7 +58,9 @@
 	/** Draws a given control point on the canvas. */
 	void drawCtrlPoint();
 
-	/** Draw a given armature on the canvas. */
+	/** Draws a given armature on the canvas. */
 	void drawArmature();
+
+	ctrlPoint createCtrlPointByClick();
 
 #endif
