@@ -1,14 +1,58 @@
 /** Graphic interface for TweenGen program using MLV library. */
-#include <MLV/MLV_all.h>
+
+#include <MLV/MLV_all.h> /* http://www-igm.univ-mlv.fr/~boussica/mlv/index.html */
 #include <stdio.h>
+
+#include "armature.h"
 
 #ifndef __INTERFACE__
 #define __INTERFACE__
+	
+	#define BACKGROUND_COLOR  MLV_COLOR_GREY25
+	#define TEXT_COLOR_1      MLV_COLOR_WHITE
+	#define TEXT_COLOR_2      MLV_COLOR_GREY1
+	#define TOOLBAR_COLOR     MLV_COLOR_GREY10
+	#define MENU_COLOR        MLV_COLOR_GREY90
 
-	/** Opens the TweenGen window. */
-	void createWindow();
+	/* Control points color */
+	#define CRT_FRAME_PT_COLOR MLV_COLOR_BLACK
+	#define PVS_FRAME_PT_COLOR MLV_COLOR_PURPLE
+	#define NXT_FRAME_PT_COLOR MLV_COLOR_GREEN
+
+	/* Bones color */
+	#define CRT_FRAME_LN_COLOR MLV_COLOR_BLACK
+	#define PVS_FRAME_LN_COLOR MLV_COLOR_DARK_PURPLE
+	#define NXT_FRAME_LN_COLOR MLV_COLOR_DARK_GREEN
+	
+	/* Dimensions */
+	#define CTRL_POINT_RADIUS  5
+	#define MARGIN_RATIO       (1.0/20.0) /* window-margin ratio */
+	#define MENU_RATIO         (1.0/40.0) /* window-menu height ratio */
+
+	typedef enum {
+		TOOL,
+		MENU,
+		CANVAS
+	} POSITION;
+
+	typedef enum {
+		EDIT_CTRL_POINTS
+	} TOOLBAR;
+
+	/** Opens the TweenGen window and stores the dimensions of the created
+	 *  window. */
+	void createWindow(unsigned int *windowWidth, unsigned int *windowHeight);
+
+	/** Drawing of the interface (buttons etc...) */
+	void drawInterface(unsigned int windowWidth, unsigned int windowHeight);
 
 	/** Closes the current window. */
 	void closeWindow();
+
+	/** Draws a given control point on the canvas. */
+	void drawCtrlPoint();
+
+	/** Draw a given armature on the canvas. */
+	void drawArmature();
 
 #endif

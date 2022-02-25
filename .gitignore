@@ -1,5 +1,3 @@
 *.o
 *.dll
-src/main.c
-test
 Makefile
