@@ -1,4 +1,4 @@
 *.o
 *.dll
 Makefile
-html/
+html/.gitignore
