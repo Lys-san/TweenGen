@@ -1,0 +1,27 @@
+\hypertarget{frame_8h_source}{}\doxysection{frame.\+h}
+\label{frame_8h_source}\index{include/frame.h@{include/frame.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <MLV/MLV\_all.h>} \textcolor{comment}{/* http://www-\/igm.univ-\/mlv.fr/\string~boussica/mlv/index.html */}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <armature.h>}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#ifndef \_\_FRAME\_\_}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#define \_\_FRAME\_\_}}
+\DoxyCodeLine{10     \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{11         \textcolor{keywordtype}{char} *name;             \textcolor{comment}{/* name */}}
+\DoxyCodeLine{12         MLV\_Image *img;         \textcolor{comment}{/* 2D array of pixels */}}
+\DoxyCodeLine{13         \mbox{\hyperlink{struct_armature}{Armature}} armature;      \textcolor{comment}{/* set of bones */}}
+\DoxyCodeLine{14         \textcolor{keyword}{struct }Nextframe *next; \textcolor{comment}{/* next frame */}}
+\DoxyCodeLine{15         \textcolor{keyword}{struct }PrevFrame *prev; \textcolor{comment}{/* previous frame */}}
+\DoxyCodeLine{16     \} \mbox{\hyperlink{struct_frame}{Frame}};}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{19     \mbox{\hyperlink{struct_frame}{Frame}} loadFrame(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *file);}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{22     \textcolor{keywordtype}{void} addFrameToSequence(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *file, \mbox{\hyperlink{struct_frame}{Frame}} *seq);}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

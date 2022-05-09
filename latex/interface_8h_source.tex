@@ -1,0 +1,64 @@
+\hypertarget{interface_8h_source}{}\doxysection{interface.\+h}
+\label{interface_8h_source}\index{include/interface.h@{include/interface.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}armature.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef \_\_INTERFACE\_\_}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define \_\_INTERFACE\_\_}}
+\DoxyCodeLine{9     }
+\DoxyCodeLine{10 \textcolor{preprocessor}{    \#define BACKGROUND\_COLOR  MLV\_COLOR\_GREY25}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{    \#define TEXT\_COLOR\_1      MLV\_COLOR\_WHITE}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{    \#define TEXT\_COLOR\_2      MLV\_COLOR\_GREY1}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{    \#define TOOLBAR\_COLOR     MLV\_COLOR\_GREY10}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{    \#define MENU\_COLOR        MLV\_COLOR\_GREY90}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{comment}{/* Control points color */}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{    \#define CRT\_FRAME\_PT\_COLOR MLV\_COLOR\_BLACK}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{    \#define PVS\_FRAME\_PT\_COLOR MLV\_COLOR\_DARK\_SLATE\_BLUE}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{    \#define NXT\_FRAME\_PT\_COLOR MLV\_COLOR\_GREEN}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{comment}{/* Bones color */}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{    \#define CRT\_FRAME\_LN\_COLOR MLV\_COLOR\_BLACK}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{    \#define PVS\_FRAME\_LN\_COLOR MLV\_COLOR\_PURPLE4}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{    \#define NXT\_FRAME\_LN\_COLOR MLV\_COLOR\_DARK\_GREEN}}
+\DoxyCodeLine{25     }
+\DoxyCodeLine{26     \textcolor{comment}{/* Dimensions */}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{    \#define CTRL\_POINT\_RADIUS  5}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{    \#define MARGIN\_RATIO       (1.0/20.0) }\textcolor{comment}{/* window-\/margin ratio */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{    \#define MENU\_RATIO         (1.0/40.0) }\textcolor{comment}{/* window-\/menu height ratio */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{32         TOOL,}
+\DoxyCodeLine{33         MENU,}
+\DoxyCodeLine{34         CANVAS}
+\DoxyCodeLine{35     \} Position;}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{38         EDIT\_CTRL\_POINTS}
+\DoxyCodeLine{39     \} Toolbar;}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{42         CRT\_FRAME, \textcolor{comment}{/* current frame */}}
+\DoxyCodeLine{43         PVS\_FRAME, \textcolor{comment}{/* previous frame */}}
+\DoxyCodeLine{44         NXT\_FRAME  \textcolor{comment}{/* next frame */}}
+\DoxyCodeLine{45     \} FramePos;}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{49     \textcolor{keywordtype}{void} createWindow(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} *windowWidth, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} *windowHeight);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{52     \textcolor{keywordtype}{void} drawInterface(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} windowWidth, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} windowHeight, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} frame);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{55     \textcolor{keywordtype}{void} closeWindow();}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{58     \textcolor{keywordtype}{void} drawCtrlPoint();}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{61     \textcolor{keywordtype}{void} drawArmature();}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     ctrlPoint createCtrlPointByClick();}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,9 +1,9 @@
 /** Graphic interface for TweenGen program using MLV library. */
 
-#include <MLV/MLV_all.h> /* http://www-igm.univ-mlv.fr/~boussica/mlv/index.html */
 #include <stdio.h>
 
 #include "armature.h"
+#include "frame.h"
 
 #ifndef __INTERFACE__
 #define __INTERFACE__
@@ -61,6 +61,6 @@
 	/** Draws a given armature on the canvas. */
 	void drawArmature();
 
-	ctrlPoint createCtrlPointByClick();
+	CtrlPoint createCtrlPointByClick();
 
 #endif

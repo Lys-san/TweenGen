@@ -1,7 +1,7 @@
 #include "armature.h"
 
-ctrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y, unsigned int frame) {
-	ctrlPoint newCtrlPoint;
+CtrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y, unsigned int frame) {
+	CtrlPoint newCtrlPoint;
 
 	/* copy of the name */
 	newCtrlPoint.name = (char *)malloc(strlen(name) * sizeof(char));
@@ -17,7 +17,7 @@ ctrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y, unsigned i
 	return newCtrlPoint;
 }
 
-void printCtrlPoint(ctrlPoint cp) {
+void printCtrlPoint(CtrlPoint cp) {
 	fprintf(stderr, "**********************************\n");
 	fprintf(stderr, "[DEBUG] Control point : %s\n", cp.name);
 	fprintf(stderr, "[DEBUG] Coordinates   : (%d, %d)\n", cp.x, cp.y);

@@ -13,25 +13,25 @@
 		unsigned int y;            /* y coordinate on the frame */
 		struct Neighbor *neighbor; /* linked point */
 		unsigned int frame;        /* num of the frame */
-	} ctrlPoint;
+	} CtrlPoint;
 
 	/** A bone is a connexion between two control points. */
 	typedef struct {
-		ctrlPoint a;               /* first point */
-		ctrlPoint b;               /* secnd point */
-	} bone;
+		CtrlPoint a;               /* first point */
+		CtrlPoint b;               /* secnd point */
+	} Bone;
 
 	/** An armature is a set of linked control points. */
 	typedef struct {
 		char *name;                /* name */
-		ctrlPoint *ctrlPoints;     /* point list (linked list) */
-	} armature;
+		CtrlPoint *CtrlPoints;     /* point list (linked list) */
+	} Armature;
 
 	/** Creates and returns a control point of given name and coordinates. */
-	ctrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y, unsigned int frame);
+	CtrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y, unsigned int frame);
 
 	/** (DEBUG) Prints the informations about a given control point. */
-	void printCtrlPoint(ctrlPoint cp);
+	void printCtrlPoint(CtrlPoint cp);
 
 
 #endif

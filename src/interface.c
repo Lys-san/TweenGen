@@ -76,7 +76,7 @@ void closeWindow() {
 	MLV_free_window();
 }
 
-void drawCtrlPoint(ctrlPoint cp, FramePos framePos) {
+void drawCtrlPoint(CtrlPoint cp, FramePos framePos) {
 	MLV_Color fillColor, lineColor;
 
 	/* selecting color according to the frame position */
@@ -110,6 +110,6 @@ void drawCtrlPoint(ctrlPoint cp, FramePos framePos) {
 	);
 }
 
-ctrlPoint createCtrlPointByClick() {
+CtrlPoint createCtrlPointByClick() {
 	/* TODO */;
 }

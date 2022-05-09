@@ -1,6 +1,7 @@
 /** Main function of the TweenGen project. */
 #include "armature.h"
 #include "interface.h"
+#include "frame.h"
 
 #undef main
 
@@ -11,12 +12,15 @@ int main(int argc, char * argv[]) {
 	unsigned int frameNo = 1;
 
 	createWindow(&windowWidth, &windowHeight);
-	ctrlPoint test = createCtrlPoint("test", windowWidth/2, windowHeight/2, 1);
+	CtrlPoint test = createCtrlPoint("test", windowWidth/2, windowHeight/2, 1);
 	printCtrlPoint(test);
 	drawCtrlPoint(test, PVS_FRAME);
+
 	MLV_actualise_window();
-	MLV_wait_seconds( 30 );
+	MLV_wait_seconds( 2 );
 	closeWindow();
+
 	printf(">>> End.\n");
+
 	return 0;
 }
