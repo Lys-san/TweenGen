@@ -21,5 +21,10 @@
 	/** adds a new Frame created from a given file to a given frame sequence. */
 	void addFrameToSequence(const char *fileName, FrameSeq *seq);
 
+	/** Goes to frame of given index in the given frame sequence. */
+	void goToFrame(int index, FrameSeq *seq);
+
+	/** (DEBUG) Prints the informations about a given FramSeq. */
+	void printFrameSeq(FrameSeq seq);
 
 #endif

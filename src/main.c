@@ -13,6 +13,14 @@ int main(int argc, char * argv[]) {
 
 	createWindow(&windowWidth, &windowHeight);
 	CtrlPoint test = createCtrlPoint("test", windowWidth/2, windowHeight/2, 1);
+
+	/* loading frames */
+	FrameSeq frames = loadFrame("files/sample/frame_1.png", frameNo);
+	addFrameToSequence("files/sample/frame_2.png", &frames);
+	addFrameToSequence("files/sample/frame_3.png", &frames);
+	printFrameSeq(frames);
+
+	/* creating control points */
 	printCtrlPoint(test);
 	drawCtrlPoint(test, PVS_FRAME);
 
