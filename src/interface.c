@@ -60,8 +60,6 @@ void drawInterface(unsigned int windowWidth, unsigned int windowHeight) {
 		"TweenGen v.0.0.2 - 2022 Lysandre Macke",
 		TEXT_COLOR_2
 	);
-
-	
 }
 
 void resizeFrame(FrameSeq *frame, unsigned int windowWidth, unsigned int windowHeight) {
