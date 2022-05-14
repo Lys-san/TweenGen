@@ -12,7 +12,6 @@
 		unsigned int x;            /* x coordinate on the frame */
 		unsigned int y;            /* y coordinate on the frame */
 		struct Neighbor *neighbor; /* linked point */
-		unsigned int frame;        /* num of the frame */
 	} CtrlPoint;
 
 	/** A bone is a connexion between two control points. */
@@ -28,7 +27,7 @@
 	} Armature;
 
 	/** Creates and returns a control point of given name and coordinates. */
-	CtrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y, unsigned int frame);
+	CtrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y);
 
 	/** (DEBUG) Prints the informations about a given control point. */
 	void printCtrlPoint(CtrlPoint cp);

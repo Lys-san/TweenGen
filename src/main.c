@@ -10,6 +10,7 @@ int main(int argc, char * argv[]) {
 
 	unsigned int n = 7; /* number of frames */
 	int i;
+	int res;
 
 	/* creating window */
 	createWindow(&windowWidth, &windowHeight);
@@ -37,7 +38,7 @@ int main(int argc, char * argv[]) {
 	drawFrame(frames, windowWidth, windowHeight);
 
 	/* creating control points */
-	CtrlPoint test = createCtrlPoint("test", windowWidth/2, windowHeight/2, 1);
+	CtrlPoint test = createCtrlPoint("test", windowWidth/2, windowHeight/2);
 
 	printCtrlPoint(test);
 	drawCtrlPoint(test, PVS_FRAME);
@@ -46,12 +47,11 @@ int main(int argc, char * argv[]) {
 
 	/* events */
     while(1) {
-    	Event ev = getEvent(windowWidth, windowHeight);
-
-	    while(ev == NONE)
-	        ev = getEvent(windowWidth, windowHeight);
-
-	    if (doAction(ev, &frames, windowWidth, windowHeight) == -1)
+    	res = getAndApplyEvent(windowWidth, windowHeight, &frames);
+    	if(res == 1)
+    		MLV_actualise_window();
+    	
+	    if ( res == -1)
 	    	break;
     }
 

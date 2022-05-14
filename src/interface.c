@@ -148,7 +148,3 @@ void drawCtrlPoint(CtrlPoint cp, FramePos framePos) {
 		lineColor
 	);
 }
-
-CtrlPoint createCtrlPointByClick() {
-	/* TODO */;
-}

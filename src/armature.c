@@ -1,6 +1,6 @@
 #include "armature.h"
 
-CtrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y, unsigned int frame) {
+CtrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y) {
 	CtrlPoint newCtrlPoint;
 
 	/* copy of the name */
@@ -10,9 +10,6 @@ CtrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y, unsigned i
 	/* storing coordinates */
 	newCtrlPoint.x = x;
 	newCtrlPoint.y = y;
-
-	/* storing frame */
-	newCtrlPoint.frame = frame;
 
 	return newCtrlPoint;
 }

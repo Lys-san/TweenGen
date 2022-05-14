@@ -59,11 +59,9 @@
 	void closeWindow();
 
 	/** Draws a given control point on the canvas. */
-	void drawCtrlPoint();
+	void drawCtrlPoint(CtrlPoint cp, FramePos framePos);
 
 	/** Draws a given armature on the canvas. */
 	void drawArmature();
-
-	CtrlPoint createCtrlPointByClick();
 
 #endif
