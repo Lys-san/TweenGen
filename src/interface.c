@@ -132,6 +132,8 @@ void drawCtrlPoint(CtrlPoint cp, FramePos framePos) {
 			fillColor = NXT_FRAME_PT_COLOR;
 			lineColor = NXT_FRAME_LN_COLOR;
 			break;
+		default:
+			break;
 	}
 
 	MLV_draw_filled_circle(

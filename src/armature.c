@@ -19,7 +19,5 @@ void printCtrlPoint(CtrlPoint cp) {
 	fprintf(stderr, "[DEBUG] Control point : %s\n", cp.name);
 	fprintf(stderr, "[DEBUG] Coordinates   : (%d, %d)\n", cp.x, cp.y);
 
-	/* do the neighbor infos later */
-
 	fprintf(stderr, "**********************************\n");
 }

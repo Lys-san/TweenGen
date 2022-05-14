@@ -11,7 +11,6 @@
 		char *name;                /* name */
 		unsigned int x;            /* x coordinate on the frame */
 		unsigned int y;            /* y coordinate on the frame */
-		struct Neighbor *neighbor; /* linked point */
 	} CtrlPoint;
 
 	/** A bone is a connexion between two control points. */
