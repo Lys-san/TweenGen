@@ -11,6 +11,7 @@
 	#define BACKGROUND_COLOR  MLV_COLOR_GREY25
 	#define TEXT_COLOR_1      MLV_COLOR_WHITE
 	#define TEXT_COLOR_2      MLV_COLOR_GREY1
+	#define FRAME_NUM_COLOR   MLV_COLOR_RED
 	#define TOOLBAR_COLOR     MLV_COLOR_GREY10
 	#define MENU_COLOR        MLV_COLOR_GREY90
 
@@ -49,8 +50,20 @@
 	 *  window. */
 	void createWindow(unsigned int *windowWidth, unsigned int *windowHeight);
 
+	/** Draws the side toolbar. */
+	void drawToolbar(unsigned int windowWidth, unsigned int windowHeight);
+
 	/** Drawing of the interface (buttons etc...) */
-	void drawInterface(unsigned int windowWidth, unsigned int windowHeight, unsigned int frame);
+	void drawInterface(unsigned int windowWidth, unsigned int windowHeight);
+
+	/** Draws the top menu. */
+	void drawTopMenu(unsigned int windowWidth, unsigned int windowHeight);
+
+	/** Resizes the current frame for it to fit in the workspace. */
+	void resizeFrame(FrameSeq *frame, unsigned int windowWidth, unsigned int windowHeight);
+
+	/** Draw the current frame in the workspace. */
+	void drawFrame(FrameSeq frame, unsigned int windowWidth, unsigned int windowHeight);
 
 	/** Closes the current window. */
 	void closeWindow();

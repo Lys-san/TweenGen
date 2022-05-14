@@ -27,11 +27,24 @@ void addFrameToSequence(const char *fileName, FrameSeq *seq) {
 }
 
 void goToFrame(int index, FrameSeq *seq) {
-	while (index > seq->index) {
-		if (seq->next != NULL)
-			seq = seq->next;
-		else
+	/* going forward in the linked list */
+	while (index > (*seq)->index) {
+		if ((*seq)->next != NULL)
+			*seq = (*seq)->next;
+		else {
 			fprintf(stderr, "Frame %d does not exist", index);
+			break;
+		}
+	}
+
+	/* going backward in the linked list */
+	while (index < (*seq)->index) {
+		if ((*seq)->prev != NULL)
+			*seq = (*seq)->prev;
+		else {
+			fprintf(stderr, "Frame %d does not exist", index);
+			break;
+		}
 	}
 }
 

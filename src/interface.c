@@ -2,8 +2,9 @@
 
 void createWindow(unsigned int *windowWidth, unsigned int *windowHeight) {
 	MLV_get_desktop_size(windowWidth, windowHeight);
-	*windowWidth  /= 1.5;
-	*windowHeight /= 1.5;
+	float ratio = 0.4; /* 1 for full-size window */
+	*windowWidth  *= ratio;
+	*windowHeight *= ratio;
 
 	MLV_create_window_with_default_font(
 		"TweenGen",
@@ -22,13 +23,12 @@ void createWindow(unsigned int *windowWidth, unsigned int *windowHeight) {
 		BACKGROUND_COLOR
 	);
 
-	drawInterface(*windowWidth, *windowHeight, 1); /* set pos to first frame at first */
+	drawInterface(*windowWidth, *windowHeight); /* set pos to first frame at first */
 
 	MLV_actualise_window();
 }
 
-void drawInterface(unsigned int windowWidth, unsigned int windowHeight, unsigned int frame) {
-	/* toolbar */
+void drawToolbar(unsigned int windowWidth, unsigned int windowHeight) {
 	MLV_draw_filled_rectangle(
 		0,
 		0,
@@ -36,8 +36,9 @@ void drawInterface(unsigned int windowWidth, unsigned int windowHeight, unsigned
 		windowHeight,
 		TOOLBAR_COLOR
 	);
+}
 
-	/* menu */
+void drawTopMenu(unsigned int windowWidth, unsigned int windowHeight) {
 	MLV_draw_filled_rectangle(
 		0,
 		0,
@@ -45,14 +46,50 @@ void drawInterface(unsigned int windowWidth, unsigned int windowHeight, unsigned
 		MENU_RATIO * windowHeight,
 		MENU_COLOR
 	);
+}
 
-	/* text */
+void drawInterface(unsigned int windowWidth, unsigned int windowHeight) {
+	/* toolbar and menu */
+	drawToolbar(windowWidth, windowHeight);	
+	drawTopMenu(windowWidth, windowHeight);
+
+	/* workspace */
 	MLV_draw_text(
 		MARGIN_RATIO * windowWidth + 10,
 		windowHeight - 20,
 		"TweenGen v.0.0.1 - 2022 Lysandre Macke",
 		TEXT_COLOR_2
 	);
+
+	
+}
+
+void resizeFrame(FrameSeq *frame, unsigned int windowWidth, unsigned int windowHeight) {
+	int width, height;
+	int workspaceWidth = windowWidth - (MARGIN_RATIO * windowWidth);
+	int workspaceHeight = windowHeight - (MENU_RATIO * windowHeight);
+
+	MLV_get_image_size((*frame)->img, &width, &height);
+
+	float ratio = (float)workspaceWidth/(float)width;
+
+	if (ratio*height > workspaceHeight)
+		ratio = workspaceHeight/height;
+
+	width *= ratio;
+	height *= ratio;
+
+	printf("%d, %d\n", width, height);
+
+	MLV_resize_image((*frame)->img, width, height);
+}
+
+void drawFrame(FrameSeq frame, unsigned int windowWidth, unsigned int windowHeight) {
+	int workspace_x = MARGIN_RATIO * windowWidth;
+	int workspace_y = MENU_RATIO * windowHeight;
+
+	/* frame */
+	MLV_draw_image(frame->img, workspace_x, workspace_y);
 
 	/* frame number */
 	MLV_change_default_font(
@@ -63,13 +100,15 @@ void drawInterface(unsigned int windowWidth, unsigned int windowHeight, unsigned
 		windowWidth - (2 * MENU_RATIO * windowHeight),
 		2 * MENU_RATIO * windowHeight,
 		"%d",
-		TEXT_COLOR_1,
-		frame
+		FRAME_NUM_COLOR,
+		frame->index
 	);
 
 	MLV_change_default_font(
 		"files/geo_1.ttf",
 		12);
+
+	MLV_actualise_window();
 }
 
 void closeWindow() {
