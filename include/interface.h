@@ -31,16 +31,6 @@
 	#define MENU_RATIO         (1.0/40.0) /* window-menu height ratio */
 
 	typedef enum {
-		TOOL,
-		MENU,
-		CANVAS
-	} Position;
-
-	typedef enum {
-		EDIT_CTRL_POINTS
-	} Toolbar;
-
-	typedef enum {
 		CRT_FRAME, /* current frame */
 		PVS_FRAME, /* previous frame */
 		NXT_FRAME  /* next frame */

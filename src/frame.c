@@ -32,7 +32,7 @@ void goToFrame(int index, FrameSeq *seq) {
 		if ((*seq)->next != NULL)
 			*seq = (*seq)->next;
 		else {
-			fprintf(stderr, "Frame %d does not exist", index);
+			/* fprintf(stderr, "Frame %d does not exist\n", index); */
 			break;
 		}
 	}
@@ -42,7 +42,7 @@ void goToFrame(int index, FrameSeq *seq) {
 		if ((*seq)->prev != NULL)
 			*seq = (*seq)->prev;
 		else {
-			fprintf(stderr, "Frame %d does not exist", index);
+			/* fprintf(stderr, "Frame %d does not exist\n", index); */
 			break;
 		}
 	}
@@ -51,7 +51,7 @@ void goToFrame(int index, FrameSeq *seq) {
 void printFrameSeq(FrameSeq seq) {
 	fprintf(stderr, "**********************************\n");
 	fprintf(stderr, "[DEBUG] actual frame : %d\n", seq->index);
-	fprintf(stderr, "[DEBUG] prev frame   : %d\n", seq->prev != NULL ? seq->prev->index : -1);
-	fprintf(stderr, "[DEBUG] next frame   : %d\n", seq->next != NULL ? seq->next->index : -1);
+	fprintf(stderr, "[DEBUG] prev frame   : %d\n", seq->prev != NULL ? seq->prev->index : 999);
+	fprintf(stderr, "[DEBUG] next frame   : %d\n", seq->next != NULL ? seq->next->index : 999);
 	fprintf(stderr, "**********************************\n");
 }
