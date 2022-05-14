@@ -21,3 +21,15 @@ void printCtrlPoint(CtrlPoint cp) {
 
 	fprintf(stderr, "**********************************\n");
 }
+
+Armature createArmature(char *name) {
+	Armature new;
+
+	new.name = (char *)malloc(strlen(name) * sizeof(char));
+	strcpy(new.name, name);
+
+	new.nPoints = 0;
+	new.nBones = 0;
+
+	return new;
+}

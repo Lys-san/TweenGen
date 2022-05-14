@@ -11,6 +11,7 @@ FrameSeq loadFrame(const char *fileName, int frameIndex) {
 		new->img   = MLV_load_image(fileName);
 		new->next  = NULL;
 		new->prev  = NULL;
+		new->armature = createArmature("armature");
 
 		return new;
 	}

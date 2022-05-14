@@ -79,8 +79,6 @@ void resizeFrame(FrameSeq *frame, unsigned int windowWidth, unsigned int windowH
 	width *= ratio;
 	height *= ratio;
 
-	printf("%d, %d\n", width, height);
-
 	MLV_resize_image((*frame)->img, width, height);
 }
 

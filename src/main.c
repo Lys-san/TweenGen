@@ -28,20 +28,14 @@ int main(int argc, char * argv[]) {
 		sprintf(buffer, "%d", i);
 		strcat(tmp, buffer);
 		strcat(tmp, ".png");
-		printf("loading %s\n", tmp);
+		printf("loading %s...\n", tmp);
 		addFrameToSequence(tmp, &frames);
 		resizeFrame(&frames, windowWidth, windowHeight);
-		printFrameSeq(frames);
 
 	}
 
 	drawFrame(frames, windowWidth, windowHeight);
 
-	/* creating control points */
-	CtrlPoint test = createCtrlPoint("test", windowWidth/2, windowHeight/2);
-
-	printCtrlPoint(test);
-	drawCtrlPoint(test, PVS_FRAME);
 
 	MLV_actualise_window();
 
@@ -50,7 +44,7 @@ int main(int argc, char * argv[]) {
     	res = getAndApplyEvent(windowWidth, windowHeight, &frames);
     	if(res == 1)
     		MLV_actualise_window();
-    	
+
 	    if ( res == -1)
 	    	break;
     }
