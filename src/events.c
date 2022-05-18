@@ -74,8 +74,7 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 							addCtrlPointToArmature(&((*frame)->armature), new);
 							printArmature((*frame)->armature);
 							/* we just have to draw the new point */
-							/* drawCtrlPoint(new, CRT_FRAME); */
-							drawArmature((*frame)->armature, CRT_FRAME);
+							drawCtrlPoint(new, CRT_FRAME);
 							return 1;
 						}
 					}
