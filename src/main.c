@@ -14,6 +14,7 @@ int main(int argc, char * argv[]) {
 
 	/* creating window */
 	createWindow(&windowWidth, &windowHeight);
+	State state = initState();
 
 	/* loading frames */
 	char src[] = "files/sample/frame_";
@@ -41,7 +42,7 @@ int main(int argc, char * argv[]) {
 
 	/* events */
     while(1) {
-    	res = getAndApplyEvent(windowWidth, windowHeight, &frames);
+    	res = getAndApplyEvent(windowWidth, windowHeight, &frames, &state);
     	if(res == 1)
     		MLV_actualise_window();
 

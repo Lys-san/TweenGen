@@ -1,6 +1,14 @@
 #include "events.h"
 
-int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameSeq *frame) {
+State initState() {
+	State new;
+	new.onionSkin = 1;
+	new.editMode = 1;
+
+	return new;
+}
+
+int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameSeq *frame, State *s) {
 
 	MLV_Keyboard_button sym   = MLV_KEYBOARD_NONE;
 	MLV_Keyboard_modifier mod = MLV_KEYBOARD_KMOD_NONE;
@@ -34,7 +42,9 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 					case MLV_KEYBOARD_LEFT :
 						goToFrame((*frame)->index - 1, frame);
 						drawFrame(*frame, windowWidth, windowHeight);
-							drawArmature((*frame)->armature, CRT_FRAME);
+						if(s->onionSkin)
+							onionSkin(*frame);
+						drawArmature((*frame)->armature, CRT_FRAME);
 
 						return 1;
 
@@ -42,8 +52,15 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 					case MLV_KEYBOARD_RIGHT :
 						goToFrame((*frame)->index + 1, frame);
 						drawFrame(*frame, windowWidth, windowHeight);
+						if(s->onionSkin)
+							onionSkin(*frame);
 						drawArmature((*frame)->armature, CRT_FRAME);
 
+						return 1;
+
+					/* ONION SKIN */
+					case MLV_KEYBOARD_o :
+						s->onionSkin = 1 - s->onionSkin;
 						return 1;
 
 					/* SAVE */
@@ -69,7 +86,7 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 
 					/* WORKSPACE */
 					else {
-						if (EDIT_MODE) {
+						if (s->editMode) {
 							CtrlPoint new = createCtrlPoint("new point", x, y);
 							addCtrlPointToArmature(&((*frame)->armature), new);
 							printArmature((*frame)->armature);

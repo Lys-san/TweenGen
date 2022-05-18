@@ -54,6 +54,4 @@
 	void addCtrlPointToArmature(Armature *armature, CtrlPoint p);
 
 
-
-
 #endif

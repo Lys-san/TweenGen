@@ -18,7 +18,7 @@
 	/* Control points color */
 	#define CRT_FRAME_PT_COLOR MLV_COLOR_BLACK
 	#define PVS_FRAME_PT_COLOR MLV_COLOR_DARK_SLATE_BLUE
-	#define NXT_FRAME_PT_COLOR MLV_COLOR_GREEN
+	#define NXT_FRAME_PT_COLOR MLV_COLOR_LIGHT_GREEN
 
 	/* Bones color */
 	#define CRT_FRAME_LN_COLOR MLV_COLOR_BLACK
@@ -63,5 +63,8 @@
 
 	/** Draws a given armature on the canvas. */
 	void drawArmature(Armature a, FramePos framePos);
+
+	/** Displays control points from neighbor frames. */
+	void onionSkin(FrameSeq seq);
 
 #endif
