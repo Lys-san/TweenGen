@@ -61,6 +61,12 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 					/* ONION SKIN */
 					case MLV_KEYBOARD_o :
 						s->onionSkin = 1 - s->onionSkin;
+						/* upadting display */
+						drawFrame(*frame, windowWidth, windowHeight);
+
+						if(s->onionSkin)
+							onionSkin(*frame);
+						drawArmature((*frame)->armature, CRT_FRAME);
 						return 1;
 
 					/* SAVE */
