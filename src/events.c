@@ -70,11 +70,12 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 					/* WORKSPACE */
 					else {
 						if (EDIT_MODE) {
-							CtrlPoint new = createCtrlPoint("a", x, y);
+							CtrlPoint new = createCtrlPoint("new point", x, y);
 							addCtrlPointToArmature(&((*frame)->armature), new);
 							printArmature((*frame)->armature);
 							/* we just have to draw the new point */
-							drawCtrlPoint(new, CRT_FRAME);
+							/* drawCtrlPoint(new, CRT_FRAME); */
+							drawArmature((*frame)->armature, CRT_FRAME);
 							return 1;
 						}
 					}

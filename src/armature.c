@@ -72,7 +72,8 @@ int isContained(Armature armature, CtrlPoint p) {
 
 void addCtrlPointToArmature(Armature *armature, CtrlPoint p) {
 	if (!isContained(*armature, p)) {
-		armature->nPoints++;
 		armature->points[armature->nPoints] = p;
+		armature->nPoints++;
+
 	}
 }
