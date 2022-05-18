@@ -146,3 +146,11 @@ void drawCtrlPoint(CtrlPoint cp, FramePos framePos) {
 		lineColor
 	);
 }
+
+void drawArmature(Armature a, FramePos framePos) {
+	int i;
+
+	for (i = 0; i < a.nPoints; i++) {
+		drawCtrlPoint(a.points[i], framePos);
+	}
+}

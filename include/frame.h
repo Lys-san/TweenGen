@@ -10,7 +10,7 @@
 	typedef struct Frame {
 		unsigned int index; /* index of the frame */
 		MLV_Image *img;     /* 2D array of pixels */
-		Armature armature;  /* set of bones */
+		Armature armature;  /* set of bones and points */
 		struct Frame *next; /* next frame */
 		struct Frame *prev; /* previous frame */
 	} Frames, *FrameSeq;
@@ -23,6 +23,7 @@
 
 	/** Goes to frame of given index in the given frame sequence. */
 	void goToFrame(int index, FrameSeq *seq);
+
 
 	/** (DEBUG) Prints the informations about a given FramSeq. */
 	void printFrameSeq(FrameSeq seq);

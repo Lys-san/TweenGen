@@ -14,6 +14,17 @@ CtrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y) {
 	return newCtrlPoint;
 }
 
+int areSamePoints(CtrlPoint p1, CtrlPoint p2) {
+	if (
+		strcmp(p1.name, p2.name) == 0
+		&& p1.x == p2.x
+		&& p1.y == p2.y
+		) 
+		return 1;
+	
+	return 0;
+}
+
 void printCtrlPoint(CtrlPoint cp) {
 	fprintf(stderr, "**********************************\n");
 	fprintf(stderr, "[DEBUG] Control point : %s\n", cp.name);
@@ -21,6 +32,21 @@ void printCtrlPoint(CtrlPoint cp) {
 
 	fprintf(stderr, "**********************************\n");
 }
+
+void printArmature(Armature a) {
+	int i;
+	CtrlPoint cp;
+
+	fprintf(stderr, "**********************************\n");
+
+	for(i = 0; i < a.nPoints; i++) {
+		cp = a.points[i];
+		fprintf(stderr, "[DEBUG] Control point : %s (%d, %d)\n", cp.name, cp.x, cp.y);
+	}
+	fprintf(stderr, "**********************************\n");
+
+}
+
 
 Armature createArmature(char *name) {
 	Armature new;
@@ -32,4 +58,21 @@ Armature createArmature(char *name) {
 	new.nBones = 0;
 
 	return new;
+}
+
+int isContained(Armature armature, CtrlPoint p) {
+	int i;
+
+	for (i = 0; i < armature.nPoints; i++) {
+		if (areSamePoints(armature.points[i], p))
+			return 1; /* found */
+	}
+	return 0; /* not found */
+}
+
+void addCtrlPointToArmature(Armature *armature, CtrlPoint p) {
+	if (!isContained(*armature, p)) {
+		armature->nPoints++;
+		armature->points[armature->nPoints] = p;
+	}
 }

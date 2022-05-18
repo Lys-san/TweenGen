@@ -33,14 +33,27 @@
 	/** Creates and returns a control point of given name and coordinates. */
 	CtrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y);
 
+	/** Returns 1 if the given control points are the same
+	 * and 0 otherwise. */
+	int areSamePoints(CtrlPoint p1, CtrlPoint p2);
+
 	/** (DEBUG) Prints the informations about a given control point. */
 	void printCtrlPoint(CtrlPoint cp);
+
+	/** (DEBUG) Prints all the control points stored in the given armature. */
+	void printArmature(Armature a);
 
 	/** Creates and returns a new Armature object. */
 	Armature createArmature(char *name);
 
+	/** Returns 0 if a given control point isn't stored in the armature object
+	 * and 1 otherwise. */
+	int isContained(Armature armature, CtrlPoint p);
+
 	/** Adds a given control point to the armature (if it isn't already in it) */
 	void addCtrlPointToArmature(Armature *armature, CtrlPoint p);
+
+
 
 
 #endif

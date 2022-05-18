@@ -62,6 +62,6 @@
 	void drawCtrlPoint(CtrlPoint cp, FramePos framePos);
 
 	/** Draws a given armature on the canvas. */
-	void drawArmature();
+	void drawArmature(Armature a, FramePos framePos);
 
 #endif

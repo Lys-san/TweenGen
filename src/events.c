@@ -34,12 +34,16 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 					case MLV_KEYBOARD_LEFT :
 						goToFrame((*frame)->index - 1, frame);
 						drawFrame(*frame, windowWidth, windowHeight);
+							drawArmature((*frame)->armature, CRT_FRAME);
+
 						return 1;
 
 					/* NEXT FRAME */
 					case MLV_KEYBOARD_RIGHT :
 						goToFrame((*frame)->index + 1, frame);
 						drawFrame(*frame, windowWidth, windowHeight);
+						drawArmature((*frame)->armature, CRT_FRAME);
+
 						return 1;
 
 					/* SAVE */
@@ -67,6 +71,9 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 					else {
 						if (EDIT_MODE) {
 							CtrlPoint new = createCtrlPoint("a", x, y);
+							addCtrlPointToArmature(&((*frame)->armature), new);
+							printArmature((*frame)->armature);
+							/* we just have to draw the new point */
 							drawCtrlPoint(new, CRT_FRAME);
 							return 1;
 						}
