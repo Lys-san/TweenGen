@@ -1,7 +1,7 @@
 /** Frame object (image) */
-#include <MLV/MLV_all.h> /* http://www-igm.univ-mlv.fr/~boussica/mlv/index.html */
-#include <armature.h>
+#include "armature.h"
 
+#include "colors.h"
 
 #ifndef __FRAME__
 #define __FRAME__

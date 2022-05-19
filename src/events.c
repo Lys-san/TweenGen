@@ -42,9 +42,8 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 					case MLV_KEYBOARD_LEFT :
 						goToFrame((*frame)->index - 1, frame);
 						drawFrame(*frame, windowWidth, windowHeight);
-						if(s->onionSkin)
-							onionSkin(*frame);
-						drawArmature((*frame)->armature, CRT_FRAME);
+						onionSkin(*frame, s->onionSkin);
+						drawArmature((*frame)->armature, CRT_FRAME, 255);
 
 						return 1;
 
@@ -52,21 +51,20 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 					case MLV_KEYBOARD_RIGHT :
 						goToFrame((*frame)->index + 1, frame);
 						drawFrame(*frame, windowWidth, windowHeight);
-						if(s->onionSkin)
-							onionSkin(*frame);
-						drawArmature((*frame)->armature, CRT_FRAME);
+						onionSkin(*frame, s->onionSkin);
+						drawArmature((*frame)->armature, CRT_FRAME, 255);
 
 						return 1;
 
 					/* ONION SKIN */
 					case MLV_KEYBOARD_o :
-						s->onionSkin = 1 - s->onionSkin;
+						s->onionSkin++;
+						s->onionSkin %= MAX_ONIONSKIN_LEVEL;
 						/* upadting display */
 						drawFrame(*frame, windowWidth, windowHeight);
 
-						if(s->onionSkin)
-							onionSkin(*frame);
-						drawArmature((*frame)->armature, CRT_FRAME);
+						onionSkin(*frame, s->onionSkin);
+						drawArmature((*frame)->armature, CRT_FRAME, 255);
 						return 1;
 
 					/* SAVE */
@@ -97,7 +95,7 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 							addCtrlPointToArmature(&((*frame)->armature), new);
 							printArmature((*frame)->armature);
 							/* we just have to draw the new point */
-							drawCtrlPoint(new, CRT_FRAME);
+							drawCtrlPoint(new, CRT_FRAME, 255);
 							return 1;
 						}
 					}

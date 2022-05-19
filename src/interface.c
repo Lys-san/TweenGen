@@ -111,7 +111,7 @@ void closeWindow() {
 	MLV_free_window();
 }
 
-void drawCtrlPoint(CtrlPoint cp, FramePos framePos) {
+void drawCtrlPoint(CtrlPoint cp, FramePos framePos, Uint8 opacity) {
 	MLV_Color fillColor, lineColor;
 
 	/* selecting color according to the frame position */
@@ -132,6 +132,11 @@ void drawCtrlPoint(CtrlPoint cp, FramePos framePos) {
 			break;
 	}
 
+	/* adjusting opacity */
+	fillColor = addOpacity(fillColor, opacity);
+	lineColor = addOpacity(lineColor, opacity);
+
+	/* drawing the point */
 	MLV_draw_filled_circle(
 		cp.x,
 		cp.y,
@@ -147,17 +152,30 @@ void drawCtrlPoint(CtrlPoint cp, FramePos framePos) {
 	);
 }
 
-void drawArmature(Armature a, FramePos framePos) {
+void drawArmature(Armature a, FramePos framePos, Uint8 opacity) {
 	int i;
 
 	for (i = 0; i < a.nPoints; i++) {
-		drawCtrlPoint(a.points[i], framePos);
+		drawCtrlPoint(a.points[i], framePos, opacity);
 	}
 }
 
-void onionSkin(FrameSeq seq) {
-	if (seq->prev != NULL)
-		drawArmature(seq->prev->armature, PVS_FRAME);
-	if (seq->next != NULL)
-		drawArmature(seq->next->armature, NXT_FRAME);
+void onionSkin(FrameSeq seq, unsigned int level) {
+	int i;
+	Uint8 opacity;
+	int ref = seq->index;
+
+	/* next frames */
+	for (i = 1; i <= level; i++) {
+		opacity = 255 - 255*((float)(i - 1)/(level));
+
+		goToFrame(ref + i, &seq);
+		drawArmature(seq->armature, NXT_FRAME, opacity);
+
+		goToFrame(ref - i, &seq);
+		drawArmature(seq->armature, PVS_FRAME, opacity);
+
+	}
+
+
 }

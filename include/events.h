@@ -1,4 +1,4 @@
-/** Bones and armature of an object */
+/** Events */
 #include "interface.h"
 
 #ifndef __EVENTS__

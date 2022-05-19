@@ -17,7 +17,7 @@
 
 	/* Control points color */
 	#define CRT_FRAME_PT_COLOR MLV_COLOR_BLACK
-	#define PVS_FRAME_PT_COLOR MLV_COLOR_DARK_SLATE_BLUE
+	#define PVS_FRAME_PT_COLOR MLV_COLOR_LIGHT_BLUE
 	#define NXT_FRAME_PT_COLOR MLV_COLOR_LIGHT_GREEN
 
 	/* Bones color */
@@ -26,9 +26,12 @@
 	#define NXT_FRAME_LN_COLOR MLV_COLOR_DARK_GREEN
 	
 	/* Dimensions */
-	#define CTRL_POINT_RADIUS  5
+	#define CTRL_POINT_RADIUS  3
 	#define MARGIN_RATIO       (1.0/20.0) /* window-margin ratio */
 	#define MENU_RATIO         (1.0/40.0) /* window-menu height ratio */
+
+	/* other constants */
+	#define MAX_ONIONSKIN_LEVEL 5
 
 	typedef enum {
 		CRT_FRAME, /* current frame */
@@ -59,12 +62,13 @@
 	void closeWindow();
 
 	/** Draws a given control point on the canvas. */
-	void drawCtrlPoint(CtrlPoint cp, FramePos framePos);
+	void drawCtrlPoint(CtrlPoint cp, FramePos framePos, Uint8 opacity);
 
 	/** Draws a given armature on the canvas. */
-	void drawArmature(Armature a, FramePos framePos);
+	void drawArmature(Armature a, FramePos framePos, Uint8 opacity);
 
-	/** Displays control points from neighbor frames. */
-	void onionSkin(FrameSeq seq);
+	/** Displays control points from neighbor frames. 
+	* level parameter indicates how many neighbor frames are shown. */
+	void onionSkin(FrameSeq seq, unsigned int level);
 
 #endif
