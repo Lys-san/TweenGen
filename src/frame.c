@@ -19,12 +19,55 @@ FrameSeq loadFrame(const char *fileName, int frameIndex) {
 	return NULL;
 }
 
+FrameSeq createEmptyFrame() {
+	FrameSeq new;
+
+	new = (Frames *)malloc(sizeof(Frames));
+
+	if (new != NULL) {
+		/* initialising the new Frame */
+		new->index = -1;
+		new->img   = NULL;
+		new->next  = NULL;
+		new->prev  = NULL;
+		new->armature = createArmature("armature");
+
+		return new;
+	}
+	fprintf(stderr, "Error while creating the Frame object.");
+	return NULL;
+}
+
 
 void addFrameToSequence(const char *fileName, FrameSeq *seq) {
 	FrameSeq new = loadFrame(fileName, (*seq)->index + 1);
 	new->prev = *seq;
 	(*seq)->next = new;
 	*seq = (*seq)->next; /* upadting the position */
+}
+
+void insertFrameHere(FrameSeq newFrame, FrameSeq *seq) {
+	newFrame->index = (*seq)->index + 1;
+	newFrame->prev = *seq;
+
+	if ((*seq)->next != NULL) {
+		FrameSeq tmp = (*seq)->next;
+		(*seq)->next = newFrame;
+		newFrame->next = tmp;
+		tmp->prev = newFrame;
+
+		*seq = (*seq)->next->next;
+
+		/* adjusting indexes */
+		while((*seq)->next != NULL) {
+			(*seq)->index++;
+			*seq = (*seq)->next;
+		}
+	}
+	else {
+		(*seq)->next = newFrame;
+		*seq = (*seq)->next; /* upadting the position */
+	}
 }
 
 void goToFrame(int index, FrameSeq *seq) {

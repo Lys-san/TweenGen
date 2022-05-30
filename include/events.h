@@ -1,5 +1,6 @@
 /** Events */
 #include "interface.h"
+#include "interpolator.h"
 
 #ifndef __EVENTS__
 #define __EVENTS__
@@ -10,6 +11,7 @@
 		MENU,
 		NEXT_FRAME,
 		PREV_FRAME,
+		GENERATE,
 		SAVE,
 		QUIT
 	} Event;

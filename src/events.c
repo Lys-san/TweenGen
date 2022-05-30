@@ -56,6 +56,14 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 
 						return 1;
 
+					/* GENERATE INBETWEENS (interpolation) */
+					case MLV_KEYBOARD_SPACE :
+						printf("Generating inbetweens...\n");
+						interpolateSeq(frame, &INTERPOL_FUNC);
+						printf("Inbetweeens generated !\n");
+
+						return 1;
+
 					/* ONION SKIN */
 					case MLV_KEYBOARD_o :
 						s->onionSkin++;

@@ -80,12 +80,26 @@ void resizeFrame(FrameSeq *frame, unsigned int windowWidth, unsigned int windowH
 	MLV_resize_image((*frame)->img, width, height);
 }
 
+void drawWhiteFrame(unsigned int windowWidth, unsigned int windowHeight) {
+	MLV_draw_filled_rectangle(
+		MARGIN_RATIO * windowWidth,
+		MENU_RATIO * windowHeight,
+		windowWidth,
+		windowHeight,
+		BACKGROUND_COLOR
+	);
+}
+
 void drawFrame(FrameSeq frame, unsigned int windowWidth, unsigned int windowHeight) {
 	int workspace_x = MARGIN_RATIO * windowWidth;
 	int workspace_y = MENU_RATIO * windowHeight;
 
 	/* frame */
-	MLV_draw_image(frame->img, workspace_x, workspace_y);
+	if (frame->img != NULL)
+		MLV_draw_image(frame->img, workspace_x, workspace_y);
+	else
+		drawWhiteFrame(windowWidth, windowHeight);
+
 
 	/* frame number */
 	MLV_change_default_font(

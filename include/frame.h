@@ -18,8 +18,14 @@
 	/** Creates and returns a Frame object according to a given file. */
 	FrameSeq loadFrame(const char *fileName, int frameIndex);
 
+	/** Creates an empty frame object */
+	FrameSeq createEmptyFrame();
+
 	/** adds a new Frame created from a given file to a given frame sequence. */
 	void addFrameToSequence(const char *fileName, FrameSeq *seq);
+
+	/** Inserts a given Frame in the sequence after the current Frame.*/
+	void insertFrameHere(FrameSeq newFrame, FrameSeq *seq);
 
 	/** Goes to frame of given index in the given frame sequence. */
 	void goToFrame(int index, FrameSeq *seq);

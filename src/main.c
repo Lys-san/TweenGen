@@ -1,7 +1,7 @@
 /** Main function of the TweenGen project. */
 #include "events.h"
 
-#undef main
+/*#undef main*/
 
 int main(int argc, char * argv[]) {
 	printf(">>> Program starts.\n");

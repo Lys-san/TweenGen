@@ -55,7 +55,10 @@
 	/** Resizes the current frame for it to fit in the workspace. */
 	void resizeFrame(FrameSeq *frame, unsigned int windowWidth, unsigned int windowHeight);
 
-	/** Draw the current frame in the workspace. */
+	/** Draws a white rectangle on the workspace */
+	void drawWhiteFrame(unsigned int windowWidth, unsigned int windowHeight);
+
+	/** Draw the current frame on the workspace. */
 	void drawFrame(FrameSeq frame, unsigned int windowWidth, unsigned int windowHeight);
 
 	/** Closes the current window. */
