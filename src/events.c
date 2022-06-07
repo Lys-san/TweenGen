@@ -44,7 +44,7 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 						drawFrame(*frame, windowWidth, windowHeight);
 						onionSkin(*frame, s->onionSkin);
 						drawArmature((*frame)->armature, CRT_FRAME, 255);
-
+						printFrameSeq(*frame);
 						return 1;
 
 					/* NEXT FRAME */
@@ -53,6 +53,17 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 						drawFrame(*frame, windowWidth, windowHeight);
 						onionSkin(*frame, s->onionSkin);
 						drawArmature((*frame)->armature, CRT_FRAME, 255);
+						printFrameSeq(*frame);
+
+						return 1;
+
+					/* NEW FRAME (for tests & debug) */
+					case MLV_KEYBOARD_n :
+						printf("Adding a new frame...\n");
+						FrameSeq new = createEmptyFrame();
+						insertFrameHere(new, frame);
+						drawFrame(*frame, windowWidth, windowHeight);
+						printf("New frame successfully added !\n");
 
 						return 1;
 
@@ -61,6 +72,9 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 						printf("Generating inbetweens...\n");
 						interpolateSeq(frame, &INTERPOL_FUNC);
 						printf("Inbetweeens generated !\n");
+						printFrameSeq(*frame);
+						drawFrame(*frame, windowWidth, windowHeight);
+						drawArmature((*frame)->armature, CRT_FRAME, 255);
 
 						return 1;
 

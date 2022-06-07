@@ -23,6 +23,7 @@ FrameSeq createEmptyFrame() {
 	FrameSeq new;
 
 	new = (Frames *)malloc(sizeof(Frames));
+	printf("[DEBUG] Malloc for a new frame OK\n");
 
 	if (new != NULL) {
 		/* initialising the new Frame */
@@ -47,9 +48,16 @@ void addFrameToSequence(const char *fileName, FrameSeq *seq) {
 }
 
 void insertFrameHere(FrameSeq newFrame, FrameSeq *seq) {
+	int initialIndex = (*seq)->index;
+
+	printf("[DEBUG] Current frame : %d\n", (*seq)->index);
+	printf("[DEBUG] Creating frame : %d\n", (*seq)->index + 1);
+
+	/* linking new frame with previous */
 	newFrame->index = (*seq)->index + 1;
 	newFrame->prev = *seq;
 
+	/* if adding inside of the sequence */
 	if ((*seq)->next != NULL) {
 		FrameSeq tmp = (*seq)->next;
 		(*seq)->next = newFrame;
@@ -57,14 +65,19 @@ void insertFrameHere(FrameSeq newFrame, FrameSeq *seq) {
 		tmp->prev = newFrame;
 
 		*seq = (*seq)->next->next;
+		(*seq)->index++;
 
 		/* adjusting indexes */
 		while((*seq)->next != NULL) {
-			(*seq)->index++;
+			printf("[DEBUG] Adjusting 1 index...\n");
 			*seq = (*seq)->next;
+			(*seq)->index++;
 		}
+		goToFrame(initialIndex + 1, seq);
 	}
+	/* adding at the end */
 	else {
+		printf("[DEBUG] Adding at the end of the sequence\n");
 		(*seq)->next = newFrame;
 		*seq = (*seq)->next; /* upadting the position */
 	}

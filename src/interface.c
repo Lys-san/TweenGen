@@ -86,25 +86,29 @@ void drawWhiteFrame(unsigned int windowWidth, unsigned int windowHeight) {
 		MENU_RATIO * windowHeight,
 		windowWidth,
 		windowHeight,
-		BACKGROUND_COLOR
+		MLV_COLOR_WHITE
 	);
 }
 
 void drawFrame(FrameSeq frame, unsigned int windowWidth, unsigned int windowHeight) {
+	printf("[DEBUG] In drawFrame function\n");
 	int workspace_x = MARGIN_RATIO * windowWidth;
 	int workspace_y = MENU_RATIO * windowHeight;
 
 	/* frame */
-	if (frame->img != NULL)
+	if (frame->img != NULL) {
+		printf("[DEBUG] Frame with img\n");
 		MLV_draw_image(frame->img, workspace_x, workspace_y);
-	else
+	}
+	else {
+		printf("[DEBUG] Empty frame\n");
 		drawWhiteFrame(windowWidth, windowHeight);
-
+	}
 
 	/* frame number */
-	MLV_change_default_font(
+	/*MLV_change_default_font(
 		"files/geo_1.ttf",
-		30);
+		30);*/
 
 	MLV_draw_text(
 		windowWidth - (2 * MENU_RATIO * windowHeight),
@@ -114,11 +118,12 @@ void drawFrame(FrameSeq frame, unsigned int windowWidth, unsigned int windowHeig
 		frame->index
 	);
 
-	MLV_change_default_font(
+	/*MLV_change_default_font(
 		"files/geo_1.ttf",
-		12);
+		12);*/
 
 	MLV_actualise_window();
+	printf("[DEBUG] End of drawFrame function.\n");
 }
 
 void closeWindow() {
