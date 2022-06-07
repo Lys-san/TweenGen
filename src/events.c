@@ -44,7 +44,6 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 						drawFrame(*frame, windowWidth, windowHeight);
 						onionSkin(*frame, s->onionSkin);
 						drawArmature((*frame)->armature, CRT_FRAME, 255);
-						printFrameSeq(*frame);
 						return 1;
 
 					/* NEXT FRAME */
@@ -53,7 +52,6 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 						drawFrame(*frame, windowWidth, windowHeight);
 						onionSkin(*frame, s->onionSkin);
 						drawArmature((*frame)->armature, CRT_FRAME, 255);
-						printFrameSeq(*frame);
 
 						return 1;
 

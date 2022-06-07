@@ -7,6 +7,17 @@ CtrlPoint linearInterpol(CtrlPoint a, CtrlPoint b) {
 	return createCtrlPoint("GenPoint", x, y);
 }
 
+CtrlPoint cosineInterpol(CtrlPoint a, CtrlPoint b) {
+	float x, y;
+	float mu_1, mu_2;
+	x = (a.x + b.x) / 2.0;
+	mu_1 = a.y < b.y ? 0.3 : 0.7;
+	mu_2 = (1 - cos(mu_1*M_PI)) / 2.0;
+	y = a.y * (1 - mu_2) + b.y * mu_2;
+	return createCtrlPoint("GenPoint", (int)x, (int)y);
+
+}
+
 void interpolateSeq(FrameSeq *seq, CtrlPoint (*interpolFunction)(CtrlPoint, CtrlPoint)) {
 	/* moving to the first frame */
 	goToFrame(1, seq);
