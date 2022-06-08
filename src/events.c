@@ -76,6 +76,17 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 
 						return 1;
 
+					/* AVERAGE SEQUENCE */
+					case MLV_KEYBOARD_t :
+						printf("Generating inbetweens...\n");
+						averageSeq(frame);
+						printf("Inbetweeens generated !\n");
+						printFrameSeq(*frame);
+						drawFrame(*frame, windowWidth, windowHeight);
+						drawArmature((*frame)->armature, CRT_FRAME, 255);
+
+						return 1;
+
 					/* ONION SKIN */
 					case MLV_KEYBOARD_o :
 						s->onionSkin++;

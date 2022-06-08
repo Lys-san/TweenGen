@@ -22,4 +22,7 @@
 	/** Use a certain interpolation method once on a given Frame sequence. */
 	void interpolateSeq(FrameSeq *seq, CtrlPoint (*interpolFunction)(CtrlPoint, CtrlPoint));
 
+	/** Creates the inbetweens from the average of the frames. */
+	void averageSeq(FrameSeq *seq);
+
 #endif
