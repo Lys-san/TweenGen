@@ -29,7 +29,6 @@ Bone boneInterpol(Bone bone_1, Bone bone_2) {
 	genLen = AVG(len1, len2);
 
 	/* getting informations based on the linear interpolation */
-
 	p1 = linearInterpol(bone_1.a, bone_2.a);
 	p2 = linearInterpol(bone_1.b, bone_2.b);
 

@@ -25,6 +25,14 @@ int areSamePoints(CtrlPoint p1, CtrlPoint p2) {
 	return 0;
 }
 
+Bone createBone(CtrlPoint a, CtrlPoint b) {
+	Bone newBone;
+	newBone.a = a;
+	newBone.b = b;
+
+	return newBone;
+}
+
 void printCtrlPoint(CtrlPoint cp) {
 	fprintf(stderr, "**********************************\n");
 	fprintf(stderr, "[DEBUG] Control point : %s\n", cp.name);
@@ -86,10 +94,26 @@ int isContained(Armature armature, CtrlPoint p) {
 	return 0; /* not found */
 }
 
+int isContainedBone(Armature armature, Bone bone) {
+	int i;
+
+	for (i = 0; i < armature.nBones; i++) {
+		if (areSameBones(armature.bones[i], bone))
+			return 1; /* found */
+	}
+	return 0; /* not found */
+}
+
 void addCtrlPointToArmature(Armature *armature, CtrlPoint p) {
 	if (!isContained(*armature, p)) {
 		armature->points[armature->nPoints] = p;
 		armature->nPoints++;
+	}
+}
 
+void addBoneToArmature(Armature *armature, Bone b) {
+	if (!isContainedBone(*armature, b)) {
+		armature->bones[armature->nBones] = b;
+		armature->nBones++;
 	}
 }

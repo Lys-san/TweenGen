@@ -2,7 +2,7 @@
 
 void createWindow(unsigned int *windowWidth, unsigned int *windowHeight) {
 	MLV_get_desktop_size(windowWidth, windowHeight);
-	float ratio = 0.7; /* 1 for full-size window */
+	float ratio = 0.45; /* 1 for full-size window */
 	*windowWidth  *= ratio;
 	*windowHeight *= ratio;
 
@@ -171,8 +171,38 @@ void drawCtrlPoint(CtrlPoint cp, FramePos framePos, Uint8 opacity) {
 	);
 }
 
+void drawBone(Bone b, FramePos framePos, Uint8 opacity) {
+	MLV_Color lineColor;
+
+	/* selecting color according to the frame position */
+	switch(framePos) {
+		case CRT_FRAME :
+			lineColor = CRT_FRAME_LN_COLOR;
+			break;
+		case PVS_FRAME :
+			lineColor = PVS_FRAME_LN_COLOR;
+			break;
+		case NXT_FRAME :
+			lineColor = NXT_FRAME_LN_COLOR;
+			break;
+		default:
+			break;
+	}
+
+	/* adjusting opacity */
+	lineColor = addOpacity(lineColor, opacity);
+
+	/* drawing the line */
+	MLV_draw_line(b.a.x, b.a.y, b.b.x, b.b.y, lineColor);
+
+}
+
 void drawArmature(Armature a, FramePos framePos, Uint8 opacity) {
 	int i;
+
+	for (i = 0; i < a.nBones; i++) {
+		drawBone(a.bones[i], framePos, opacity);
+	}
 
 	for (i = 0; i < a.nPoints; i++) {
 		drawCtrlPoint(a.points[i], framePos, opacity);

@@ -29,9 +29,15 @@
 	/** Returns a state with modes set to 0 or 1. */
 	State initState();
 
+	/** Returns 1 if the given coordinates are on a point of the armature
+	    and 0 otherwise. Stores the selected point into "point". */
+	int hasSelectedPoint(int xMouse, int yMouse, Armature armature, CtrlPoint *point);
+
 	/** Does an action according to a given event. 
 	 *  Returns 1 if an action was performed, 0 othewise and
 	 *  -1 if the user quits the program. */
 	int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameSeq *frame, State *s);
+
+
 
 #endif

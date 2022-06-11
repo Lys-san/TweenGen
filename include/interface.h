@@ -26,7 +26,7 @@
 	#define NXT_FRAME_LN_COLOR MLV_COLOR_DARK_GREEN
 	
 	/* Dimensions */
-	#define CTRL_POINT_RADIUS  3
+	#define CTRL_POINT_RADIUS  4
 	#define MARGIN_RATIO       (1.0/20.0) /* window-margin ratio */
 	#define MENU_RATIO         (1.0/40.0) /* window-menu height ratio */
 
@@ -66,6 +66,9 @@
 
 	/** Draws a given control point on the canvas. */
 	void drawCtrlPoint(CtrlPoint cp, FramePos framePos, Uint8 opacity);
+
+	/** Draws a given bone o, the canvas. */
+	void drawBone(Bone b, FramePos framePos, Uint8 opacity);
 
 	/** Draws a given armature on the canvas. */
 	void drawArmature(Armature a, FramePos framePos, Uint8 opacity);

@@ -41,6 +41,9 @@
 	 *  and 0 otherwise. */
 	int areSamePoints(CtrlPoint p1, CtrlPoint p2);
 
+	/** Creates and returns a bone formed with the given points. */
+	Bone createBone(CtrlPoint a, CtrlPoint b);
+
 	/** (DEBUG) Prints the informations about a given control point. */
 	void printCtrlPoint(CtrlPoint cp);
 
@@ -65,8 +68,12 @@
 	 *  and 1 otherwise. */
 	int isContained(Armature armature, CtrlPoint p);
 
+	int isContainedBone(Armature armature, Bone bone);
+
 	/** Adds a given control point to the armature (if it isn't already in it) */
 	void addCtrlPointToArmature(Armature *armature, CtrlPoint p);
 
+	/** Adds a given bone to the armature (if it isn't already in it) */
+	void addBoneToArmature(Armature *armature, Bone b);
 
 #endif

@@ -8,6 +8,23 @@ State initState() {
 	return new;
 }
 
+int hasSelectedPoint(int xMouse, int yMouse, Armature armature, CtrlPoint *point) {
+	int i;
+
+	for (i = 0; i < armature.nPoints; i++) {
+		if (xMouse > armature.points[i].x - CTRL_POINT_RADIUS
+			&& xMouse < armature.points[i].x + CTRL_POINT_RADIUS
+			&& yMouse > armature.points[i].y - CTRL_POINT_RADIUS
+			&& yMouse < armature.points[i].y + CTRL_POINT_RADIUS) {
+			
+			*point = armature.points[i];
+			return 1;
+		}
+	}
+	return 0;
+}
+
+
 int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameSeq *frame, State *s) {
 
 	MLV_Keyboard_button sym   = MLV_KEYBOARD_NONE;
@@ -19,6 +36,8 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 
 	int workspace_x = MARGIN_RATIO * windowWidth;
 	int workspace_y = MENU_RATIO * windowHeight;
+
+	CtrlPoint selectedPoint;
 
 	/* getting the event */
 	MLV_Event ev = MLV_get_event( 
@@ -122,12 +141,42 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 					/* WORKSPACE */
 					else {
 						if (s->editMode) {
-							CtrlPoint new = createCtrlPoint("new point", x, y);
-							addCtrlPointToArmature(&((*frame)->armature), new);
-							printArmature((*frame)->armature);
-							/* we just have to draw the new point */
-							drawCtrlPoint(new, CRT_FRAME, 255);
-							return 1;
+							if (hasSelectedPoint(x, y, (*frame)->armature, &selectedPoint)) {
+								printf("[DEBUG] Clicked on a point\n");
+								CtrlPoint otherSelectedPoint;
+
+								if((*frame)->armature.nPoints > 1) {
+									/* waiting for another selection */
+									
+									MLV_wait_mouse(&x, &y);
+									
+									while(!hasSelectedPoint(x, y, (*frame)->armature, &otherSelectedPoint)) {
+										MLV_wait_mouse(&x, &y);
+										printf("[DEBUG] NULL selection\n");
+									}
+
+									Bone newBone = createBone(selectedPoint, otherSelectedPoint);
+									addBoneToArmature(&((*frame)->armature), newBone);
+
+									drawBone(newBone, CRT_FRAME, 255);
+									printf("(Info) Connected points successfully.\n");
+									return 1;
+								}
+								else {
+									printf("(Info) No other point to connect with !\n");
+									return 0;
+								}
+
+							}
+							else {
+								CtrlPoint new = createCtrlPoint("new point", x, y);
+								addCtrlPointToArmature(&((*frame)->armature), new);
+								printArmature((*frame)->armature);
+								/* we just have to draw the new point */
+								drawCtrlPoint(new, CRT_FRAME, 255);
+								return 1;
+							}
+
 						}
 					}
 				}
