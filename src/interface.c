@@ -57,7 +57,7 @@ void drawInterface(unsigned int windowWidth, unsigned int windowHeight) {
 	MLV_draw_text(
 		MARGIN_RATIO * windowWidth + 10,
 		windowHeight - 20,
-		"TweenGen v.0.1.0 - 2022 Lysandre Macke",
+		"TweenGen v.0.1.1 - 2022 Lysandre Macke",
 		TEXT_COLOR_2
 	);
 }
