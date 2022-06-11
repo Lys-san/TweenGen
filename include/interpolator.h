@@ -1,12 +1,12 @@
 /** Frames/points interpolation module */
 #include "frame.h"
-#include <math.h>
 
 #ifndef __INTERPOL__
 #define __INTERPOL__
 	#ifndef M_PI
 	#define M_PI 3.14159265359
 	#endif
+	#define ABS(a) a > 0 ? (a) : (-a)
 	#define INTERPOL_FUNC cosineInterpol /* default interpolation function */
 
 	/** Linear interpolation given two known points : the returned point
@@ -15,6 +15,9 @@
 
 	/** Cosine interpolation given two points. The created curve is smoothed. */
 	CtrlPoint cosineInterpol(CtrlPoint a, CtrlPoint b);
+
+	/** Ameliorated interpolation considering bone length. */
+	Bone boneInterpol(Bone bone_1, Bone bone_2);
 
 	/** Average of two images */
 	MLV_Image avgImages(MLV_Image a, MLV_Image b);

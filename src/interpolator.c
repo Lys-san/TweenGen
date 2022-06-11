@@ -11,11 +11,47 @@ CtrlPoint cosineInterpol(CtrlPoint a, CtrlPoint b) {
 	float x, y;
 	float mu_1, mu_2;
 	x = (a.x + b.x) / 2.0;
-	mu_1 = a.y > b.y ? 0.3 : 0.7;
+	mu_1 = a.y < b.y ? 0.3 : 0.7;
 	mu_2 = (1 - cos(mu_1*M_PI)) / 2.0;
 	y = a.y * (1 - mu_2) + b.y * mu_2;
 	return createCtrlPoint("GenPoint", (int)x, (int)y);
+}
 
+Bone boneInterpol(Bone bone_1, Bone bone_2) {
+	CtrlPoint p1, p2;       /* generated control points */
+	int len1, len2, genLen; /* length of the 2 bones and generated length */
+	int cosTheta;           /* cos of the angle formed by the generated bone and the x axis */
+	CtrlPoint base, mv;     /* base point and moving point */
+	int x, y;               /* adjusted coordinates of the moving point */
+	
+	len1 = length(bone_1);
+	len2 = length(bone_2);
+	genLen = AVG(len1, len2);
+
+	/* getting informations based on the linear interpolation */
+
+	p1 = linearInterpol(bone_1.a, bone_2.a);
+	p2 = linearInterpol(bone_1.b, bone_2.b);
+
+	if (dist(bone_1.a, bone_2.a) < dist(bone_1.b, bone_2.b)) {
+		base = p1;
+		mv = p2;
+	}
+	else {
+		base = p2;
+		mv = p1;
+	}
+	
+
+	/* adjusting the interpolation of the moving point */
+	cosTheta = (ABS(mv.x - base.x))/dist(base, mv);
+	x = genLen*cosTheta + base.x;
+	y = sqrt(SQUARE(genLen) + SQUARE(x - base.x)) + base.y;
+
+	CtrlPoint genMvPoint = createCtrlPoint("GenPoint", x, y);
+
+	Bone genBone = {base, genMvPoint};
+	return genBone;
 }
 
 void interpolateSeq(FrameSeq *seq, CtrlPoint (*interpolFunction)(CtrlPoint, CtrlPoint)) {

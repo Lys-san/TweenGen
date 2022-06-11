@@ -33,6 +33,22 @@ void printCtrlPoint(CtrlPoint cp) {
 	fprintf(stderr, "**********************************\n");
 }
 
+int areSameBones(Bone bone_1, Bone bone_2) {
+	if (areSamePoints(bone_1.a, bone_2.a) && areSamePoints(bone_1.b, bone_2.b))
+		return 0;
+	if (areSamePoints(bone_1.a, bone_2.b) && areSamePoints(bone_1.b, bone_2.a))
+		return 1;
+	return -1;
+}
+
+int length(Bone bone) {
+	return sqrt(SQUARE(bone.b.x - bone.a.x) + SQUARE(bone.b.y - bone.a.y));
+}
+
+int dist(CtrlPoint a, CtrlPoint b) {
+	return sqrt(SQUARE(b.x - a.x) + SQUARE(b.y - a.y));
+}
+
 void printArmature(Armature a) {
 	int i;
 	CtrlPoint cp;
