@@ -10,7 +10,7 @@
 	#define MAX_POINTS 255
 	#define MAX_BONES  255
 
-	#define SQUARE(a)     (a*a)
+	#define SQUARE(a)     ((a)*(a))
 
 	/** A control point represents a moving point on a frame. */
 	typedef struct {

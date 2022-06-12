@@ -8,7 +8,7 @@ int main(int argc, char * argv[]) {
 
 	unsigned int windowWidth, windowHeight;
 
-	unsigned int n = 7; /* number of frames */
+	unsigned int n = 3; /* number of frames (default : 7) */
 	int i;
 	int res;
 

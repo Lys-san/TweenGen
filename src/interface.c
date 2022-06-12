@@ -2,7 +2,7 @@
 
 void createWindow(unsigned int *windowWidth, unsigned int *windowHeight) {
 	MLV_get_desktop_size(windowWidth, windowHeight);
-	float ratio = 0.45; /* 1 for full-size window */
+	float ratio = 0.7; /* 1 for full-size window */
 	*windowWidth  *= ratio;
 	*windowHeight *= ratio;
 

@@ -95,6 +95,16 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 
 						return 1;
 
+					/* GENERATE INBETWEENS from bones (interpolation) */
+					case MLV_KEYBOARD_b :
+						printf("Generating inbetweens...\n");
+						interpolateSeqFromBones(frame, &boneInterpol);
+						printf("Inbetweeens generated !\n");
+						printFrameSeq(*frame);
+						drawFrame(*frame, windowWidth, windowHeight);
+						drawArmature((*frame)->armature, CRT_FRAME, 255);
+
+						return 1;
 					/* AVERAGE SEQUENCE */
 					case MLV_KEYBOARD_t :
 						printf("Generating inbetweens...\n");

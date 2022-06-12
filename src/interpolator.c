@@ -1,5 +1,12 @@
 #include "interpolator.h"
 
+int abs(int a) {
+	if (a > 0)
+		return a;
+	return -a;
+}
+
+
 CtrlPoint linearInterpol(CtrlPoint a, CtrlPoint b) {
 	int x, y;
 	x = (a.x + b.x) / 2;
@@ -20,7 +27,7 @@ CtrlPoint cosineInterpol(CtrlPoint a, CtrlPoint b) {
 Bone boneInterpol(Bone bone_1, Bone bone_2) {
 	CtrlPoint p1, p2;       /* generated control points */
 	int len1, len2, genLen; /* length of the 2 bones and generated length */
-	int cosTheta;           /* cos of the angle formed by the generated bone and the x axis */
+	float cosTheta;         /* cos of the angle formed by the generated bone and the x axis */
 	CtrlPoint base, mv;     /* base point and moving point */
 	int x, y;               /* adjusted coordinates of the moving point */
 	
@@ -43,12 +50,17 @@ Bone boneInterpol(Bone bone_1, Bone bone_2) {
 	
 
 	/* adjusting the interpolation of the moving point */
-	cosTheta = (ABS(mv.x - base.x))/dist(base, mv);
-	x = genLen*cosTheta + base.x;
-	y = sqrt(SQUARE(genLen) + SQUARE(x - base.x)) + base.y;
+	cosTheta = (abs((mv.x - base.x)))/((float)dist(base, mv));
+	printf("[DEBUG] %d and ABS(mv.x - base.x) = %d\n", mv.x - base.x,  abs((mv.x - base.x)));
+	printf("[DEBUG] (float)dist(base, mv) = %f\n", ((float)dist(base, mv)));
+	printf("[DEBUG] division : %f\n", (ABS(mv.x - base.x))/((float)dist(base, mv))); 
+	printf("[DEBUG] cos(theta) = %f\n", cosTheta);
+	x = - genLen*cosTheta + base.x;
+	y = - sqrt(SQUARE(genLen) + SQUARE(x - base.x)) + base.y;
 
 	CtrlPoint genMvPoint = createCtrlPoint("GenPoint", x, y);
 
+	printCtrlPoint(genMvPoint);
 	Bone genBone = {base, genMvPoint};
 	return genBone;
 }
@@ -73,6 +85,36 @@ void interpolateSeq(FrameSeq *seq, CtrlPoint (*interpolFunction)(CtrlPoint, Ctrl
 				(*seq)->next->armature.points[i]
 				);
 			addCtrlPointToArmature(&(tmp->armature), genPoint);
+			
+		}
+		insertFrameHere(tmp, seq);
+		*seq = (*seq)->next;
+	}
+	printf("[DEBUG] End of interpolate function.\n");
+}
+
+void interpolateSeqFromBones(FrameSeq *seq, Bone (*interpolFunction)(Bone, Bone)) {
+	/* moving to the first frame */
+	goToFrame(1, seq);
+	int i;
+	int nBones = (*seq)->armature.nBones; /* should be constant for each frames */
+	Bone genBone;
+	FrameSeq tmp; /* generated frames */
+
+	/* going forward in the linked list until reaching the last frame */
+	while ((*seq)->next != NULL) {
+		tmp = createEmptyFrame();
+
+		/* generating bones */
+		for (i = 0; i < nBones; i++) {
+			genBone = (*interpolFunction)(
+				(*seq)->armature.bones[i],
+				(*seq)->next->armature.bones[i]
+				);
+			addBoneToArmature(&(tmp->armature), genBone);
+			addCtrlPointToArmature(&(tmp->armature), genBone.a);
+			addCtrlPointToArmature(&(tmp->armature), genBone.b);
+
 			
 		}
 		insertFrameHere(tmp, seq);
