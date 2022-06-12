@@ -56,7 +56,7 @@
 	int length(Bone bone);
 
 	/** Returns the euclidian norm between a and b. */
-	int dist(CtrlPoint a, CtrlPoint b);
+	float dist(CtrlPoint a, CtrlPoint b);
 
 	/** (DEBUG) Prints all the control points stored in the given armature. */
 	void printArmature(Armature a);

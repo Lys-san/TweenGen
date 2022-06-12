@@ -53,7 +53,7 @@ int length(Bone bone) {
 	return sqrt(SQUARE(bone.b.x - bone.a.x) + SQUARE(bone.b.y - bone.a.y));
 }
 
-int dist(CtrlPoint a, CtrlPoint b) {
+float dist(CtrlPoint a, CtrlPoint b) {
 	return sqrt(SQUARE(b.x - a.x) + SQUARE(b.y - a.y));
 }
 

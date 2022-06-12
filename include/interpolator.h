@@ -8,7 +8,7 @@
 	#ifndef M_PI
 	#define M_PI 3.14159265359
 	#endif
-	#define INTERPOL_FUNC cosineInterpol /* default interpolation function */
+	#define INTERPOL_FUNC linearInterpol /* default interpolation function */
 
 	/** Absolute value */
 	int abs(int a);

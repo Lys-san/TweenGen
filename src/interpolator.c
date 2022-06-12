@@ -34,6 +34,7 @@ Bone boneInterpol(Bone bone_1, Bone bone_2) {
 	len1 = length(bone_1);
 	len2 = length(bone_2);
 	genLen = AVG(len1, len2);
+	printf("[DEBUG] lengths : %d %d %d\n", len1, len2, genLen);
 
 	/* getting informations based on the linear interpolation */
 	p1 = linearInterpol(bone_1.a, bone_2.a);
@@ -50,18 +51,20 @@ Bone boneInterpol(Bone bone_1, Bone bone_2) {
 	
 
 	/* adjusting the interpolation of the moving point */
-	cosTheta = (abs((mv.x - base.x)))/((float)dist(base, mv));
-	printf("[DEBUG] %d and ABS(mv.x - base.x) = %d\n", mv.x - base.x,  abs((mv.x - base.x)));
-	printf("[DEBUG] (float)dist(base, mv) = %f\n", ((float)dist(base, mv)));
-	printf("[DEBUG] division : %f\n", (ABS(mv.x - base.x))/((float)dist(base, mv))); 
-	printf("[DEBUG] cos(theta) = %f\n", cosTheta);
+	cosTheta = abs(mv.x - base.x)/((dist(base, mv)));
+	printf("----%d %d\n", mv.x, base.x);
+	printf("cos(theta) : %d / %f = %f\n", (mv.x - base.x), dist(base, mv), cosTheta);
+	printf("[DEBUG] BASE POINT : \n");
+	printCtrlPoint(base);
 	x = - genLen*cosTheta + base.x;
-	y = - sqrt(SQUARE(genLen) + SQUARE(x - base.x)) + base.y;
+	printf("[DEBUG] %d * %f + %d = %d\n", -genLen, cosTheta, base.x, x);
+	y = - sqrt(SQUARE(genLen) + SQUARE((x - base.x))) + base.y;
 
 	CtrlPoint genMvPoint = createCtrlPoint("GenPoint", x, y);
 
 	printCtrlPoint(genMvPoint);
 	Bone genBone = {base, genMvPoint};
+	printf("[DEBUG] final length : %d\n", length(genBone));
 	return genBone;
 }
 
@@ -70,6 +73,7 @@ void interpolateSeq(FrameSeq *seq, CtrlPoint (*interpolFunction)(CtrlPoint, Ctrl
 	goToFrame(1, seq);
 	int i;
 	int nPoints = (*seq)->armature.nPoints; /* should be constant for each frames */
+	int nBones = (*seq)->armature.nBones;
 	CtrlPoint genPoint;
 	FrameSeq tmp; /* generated frames */
 
@@ -87,6 +91,18 @@ void interpolateSeq(FrameSeq *seq, CtrlPoint (*interpolFunction)(CtrlPoint, Ctrl
 			addCtrlPointToArmature(&(tmp->armature), genPoint);
 			
 		}
+		/* recreating the bones */
+
+		/* TODO */
+		/*for (i = 0; i < nPoints; i++) {
+			genPoint = (*interpolFunction)(
+				(*seq)->armature.points[i],
+				(*seq)->next->armature.points[i]
+				);
+			addCtrlPointToArmature(&(tmp->armature), genPoint);
+			
+		}*/
+
 		insertFrameHere(tmp, seq);
 		*seq = (*seq)->next;
 	}
