@@ -1,6 +1,5 @@
 *.o
 *.dll
-Makefile
 data/
 html/
 latex/
