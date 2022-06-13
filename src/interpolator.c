@@ -58,7 +58,7 @@ Bone boneInterpol(Bone bone_1, Bone bone_2) {
 	printCtrlPoint(base);
 	x = - genLen*cosTheta + base.x;
 	printf("[DEBUG] %d * %f + %d = %d\n", -genLen, cosTheta, base.x, x);
-	y = - sqrt(SQUARE(genLen) + SQUARE((x - base.x))) + base.y;
+	y = - (int)sqrt((double)SQUARE(genLen) - (double)SQUARE((x - base.x))) + (double)base.y;
 
 	CtrlPoint genMvPoint = createCtrlPoint("GenPoint", x, y);
 
