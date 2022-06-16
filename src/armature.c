@@ -112,8 +112,9 @@ void addCtrlPointToArmature(Armature *armature, CtrlPoint p) {
 }
 
 void addBoneToArmature(Armature *armature, Bone b) {
-	if (!isContainedBone(*armature, b)) {
+	/*if (!isContainedBone(*armature, b)) {*/
+		printf("HERE\n");
 		armature->bones[armature->nBones] = b;
 		armature->nBones++;
-	}
+	/*}*/
 }

@@ -170,6 +170,7 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 
 									drawBone(newBone, CRT_FRAME, 255);
 									printf("(Info) Connected points successfully.\n");
+									printf("[DEBUG] Armature has now %d bones.\n", (*frame)->armature.nBones);
 									return 1;
 								}
 								else {

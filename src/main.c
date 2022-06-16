@@ -26,7 +26,7 @@ int main(int argc, char * argv[]) {
 
 	for(i = 2; i < n + 1; i++) {
 		strncpy(tmp, src, sizeof(tmp));
-		sprintf(buffer, "%d", i);
+		sprintf(buffer, "%d", i + 3);
 		strcat(tmp, buffer);
 		strcat(tmp, ".png");
 		printf("loading %s...\n", tmp);

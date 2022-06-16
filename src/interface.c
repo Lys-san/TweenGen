@@ -199,7 +199,8 @@ void drawBone(Bone b, FramePos framePos, Uint8 opacity) {
 
 void drawArmature(Armature a, FramePos framePos, Uint8 opacity) {
 	int i;
-
+	printf("[DEBUG] Starting drawing armature\n");
+	printf("[DEBUG] a.nbBones : %d\n", a.nBones);
 	for (i = 0; i < a.nBones; i++) {
 		drawBone(a.bones[i], framePos, opacity);
 	}
