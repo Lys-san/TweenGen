@@ -8,22 +8,30 @@
 #ifndef __INTERFACE__
 #define __INTERFACE__
 	
-	#define BACKGROUND_COLOR  MLV_COLOR_GREY25
-	#define TEXT_COLOR_1      MLV_COLOR_WHITE
-	#define TEXT_COLOR_2      MLV_COLOR_GREY1
-	#define FRAME_NUM_COLOR   MLV_COLOR_RED
-	#define TOOLBAR_COLOR     MLV_COLOR_GREY10
-	#define MENU_COLOR        MLV_COLOR_GREY90
+	#define BACKGROUND_COLOR   MLV_COLOR_GREY25
+	#define TEXT_COLOR_1       MLV_COLOR_WHITE
+	#define TEXT_COLOR_2       MLV_COLOR_GREY1
+	#define FRAME_NUM_COLOR    MLV_COLOR_RED
+	#define TOOLBAR_COLOR      MLV_COLOR_GREY10
+	#define MENU_COLOR         MLV_COLOR_GREY90
 
 	/* Control points color */
 	#define CRT_FRAME_PT_COLOR MLV_COLOR_BLACK
 	#define PVS_FRAME_PT_COLOR MLV_COLOR_LIGHT_BLUE
 	#define NXT_FRAME_PT_COLOR MLV_COLOR_LIGHT_GREEN
 
+	#define SELECT_PT_COLOR    MLV_COLOR_ORANGE
+
+
 	/* Bones color */
 	#define CRT_FRAME_LN_COLOR MLV_COLOR_BLACK
 	#define PVS_FRAME_LN_COLOR MLV_COLOR_PURPLE4
 	#define NXT_FRAME_LN_COLOR MLV_COLOR_DARK_GREEN
+
+	#define SELECT_LN_COLOR    MLV_COLOR_DARK_ORANGE
+
+
+	/* Other colors... */
 	
 	/* Dimensions */
 	#define CTRL_POINT_RADIUS  4
@@ -66,6 +74,9 @@
 
 	/** Draws a given control point on the canvas. */
 	void drawCtrlPoint(CtrlPoint cp, FramePos framePos, Uint8 opacity);
+
+	/** Highlights a given point. */
+	void drawPointSelection(CtrlPoint cp);
 
 	/** Draws a given bone o, the canvas. */
 	void drawBone(Bone b, FramePos framePos, Uint8 opacity);

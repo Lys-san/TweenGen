@@ -153,6 +153,8 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 						if (s->editMode) {
 							if (hasSelectedPoint(x, y, (*frame)->armature, &selectedPoint)) {
 								printf("[DEBUG] Clicked on a point\n");
+								drawPointSelection(selectedPoint); /* highlighting selected point */
+								MLV_actualise_window();
 								CtrlPoint otherSelectedPoint;
 
 								if((*frame)->armature.nPoints > 1) {
@@ -169,6 +171,8 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 									addBoneToArmature(&((*frame)->armature), newBone);
 
 									drawBone(newBone, CRT_FRAME, 255);
+									drawCtrlPoint(selectedPoint, CRT_FRAME, 255);
+
 									printf("(Info) Connected points successfully.\n");
 									printf("[DEBUG] Armature has now %d bones.\n", (*frame)->armature.nBones);
 									return 1;

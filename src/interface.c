@@ -171,6 +171,23 @@ void drawCtrlPoint(CtrlPoint cp, FramePos framePos, Uint8 opacity) {
 	);
 }
 
+void drawPointSelection(CtrlPoint cp) {
+	/* drawing the point */
+	MLV_draw_filled_circle(
+		cp.x,
+		cp.y,
+		CTRL_POINT_RADIUS,
+		SELECT_PT_COLOR
+	);
+
+	MLV_draw_circle(
+		cp.x,
+		cp.y,
+		CTRL_POINT_RADIUS,
+		SELECT_LN_COLOR
+	);
+}
+
 void drawBone(Bone b, FramePos framePos, Uint8 opacity) {
 	MLV_Color lineColor;
 
