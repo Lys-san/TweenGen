@@ -164,7 +164,10 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 									/* didn't clicked on a point : updating point position */
 									if (!hasSelectedPoint(x, y, (*frame)->armature, &otherSelectedPoint)) {
 										printf("Updating position.\n");
-										updatePointWithNewCoords(&selectedPoint, x, y);
+										printCtrlPoint((*frame)->armature.points[isContained((*frame)->armature, selectedPoint)]);
+										/*updatePointWithNewCoords(&selectedPoint, x, y);*/
+										updatePointWithNewCoords(&((*frame)->armature.points[isContained((*frame)->armature, selectedPoint)]), x, y);
+										
 										drawFrame(*frame, windowWidth, windowHeight);
 										drawArmature((*frame)->armature, CRT_FRAME, 255);
 
