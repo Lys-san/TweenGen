@@ -84,10 +84,14 @@ void insertFrameHere(FrameSeq newFrame, FrameSeq *seq) {
 }
 
 void goToFrame(int index, FrameSeq *seq) {
+	index = index > 0 ? index : 0; 
+	printf("-- Want to go to frame %d from frame %d\n", index, (*seq)->index);
 	/* going forward in the linked list */
 	while (index > (*seq)->index) {
-		if ((*seq)->next != NULL)
+		if ((*seq)->next != NULL) {
 			*seq = (*seq)->next;
+			printf("-- Going forward to frame %d \n", (*seq)->index);
+		}
 		else {
 			/* fprintf(stderr, "Frame %d does not exist\n", index); */
 			break;
@@ -96,8 +100,11 @@ void goToFrame(int index, FrameSeq *seq) {
 
 	/* going backward in the linked list */
 	while (index < (*seq)->index) {
-		if ((*seq)->prev != NULL)
+		if ((*seq)->prev != NULL) {
 			*seq = (*seq)->prev;
+			printf("-- Going backward to frame %d \n", (*seq)->index);
+		}
+
 		else {
 			/* fprintf(stderr, "Frame %d does not exist\n", index); */
 			break;
