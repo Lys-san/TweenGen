@@ -214,18 +214,15 @@ void onionSkin(FrameSeq seq, unsigned int level) {
 	int i;
 	Uint8 opacity;
 	int ref = seq->index;
-	printf("[DEBUG] Current frame : %d\n", ref);
 
 	/* next frames */
 	for (i = 1; i <= level; i++) {
 		opacity = 255 - 255*((float)(i - 1)/(level));
 
 		goToFrame(ref + i, &seq);
-		printf("[DEBUG] ------ Drawing armature of frame %d, expected %d\n", seq->index, ref + i);
 		drawArmature(seq->armature, NXT_FRAME, opacity);
 
 		goToFrame(ref - i, &seq);
-		printf("[DEBUG] Drawing armature of frame %d, expected %d\n", seq->index, ref - i);
 		drawArmature(seq->armature, PVS_FRAME, opacity);
 
 	}
