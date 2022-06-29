@@ -14,6 +14,11 @@ CtrlPoint createCtrlPoint(char *name, unsigned int x, unsigned int y) {
 	return newCtrlPoint;
 }
 
+void updatePointWithNewCoords(CtrlPoint *cp, unsigned int new_x, unsigned int new_y) {
+	cp->x = new_x;
+	cp->y = new_y;
+}
+
 int areSamePoints(CtrlPoint p1, CtrlPoint p2) {
 	if (
 		strcmp(p1.name, p2.name) == 0
@@ -89,9 +94,9 @@ int isContained(Armature armature, CtrlPoint p) {
 
 	for (i = 0; i < armature.nPoints; i++) {
 		if (areSamePoints(armature.points[i], p))
-			return 1; /* found */
+			return i; /* found */
 	}
-	return 0; /* not found */
+	return -1; /* not found */
 }
 
 int isContainedBone(Armature armature, Bone bone) {
@@ -105,7 +110,7 @@ int isContainedBone(Armature armature, Bone bone) {
 }
 
 void addCtrlPointToArmature(Armature *armature, CtrlPoint p) {
-	if (!isContained(*armature, p)) {
+	if (isContained(*armature, p) < 0) {
 		armature->points[armature->nPoints] = p;
 		armature->nPoints++;
 	}

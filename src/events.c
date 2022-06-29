@@ -153,36 +153,50 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 						if (s->editMode) {
 							if (hasSelectedPoint(x, y, (*frame)->armature, &selectedPoint)) {
 								printf("[DEBUG] Clicked on a point\n");
-
+								drawPointSelection(selectedPoint); /* highlighting selected point */
+								MLV_actualise_window();
 								CtrlPoint otherSelectedPoint;
 
-								if((*frame)->armature.nPoints > 1) {
-									drawPointSelection(selectedPoint); /* highlighting selected point */
-									MLV_actualise_window();
-									/* waiting for another selection */
-									
+								/* wait until end of edit */
+								while(1) {
 									MLV_wait_mouse(&x, &y);
-									
-									while(!hasSelectedPoint(x, y, (*frame)->armature, &otherSelectedPoint)) {
-										MLV_wait_mouse(&x, &y);
-										printf("[DEBUG] NULL selection\n");
+
+									/* didn't clicked on a point : updating point position */
+									if (!hasSelectedPoint(x, y, (*frame)->armature, &otherSelectedPoint)) {
+										printf("Updating position.\n");
+										updatePointWithNewCoords(&selectedPoint, x, y);
+										drawFrame(*frame, windowWidth, windowHeight);
+										drawArmature((*frame)->armature, CRT_FRAME, 255);
+
+										return 1;
+									}
+									/* clicked on another point */
+									else {
+										/* cancel selection */
+										if(areSamePoints(selectedPoint, otherSelectedPoint)) {
+											drawCtrlPoint(selectedPoint, CRT_FRAME, 255);
+											MLV_actualise_window();
+											printf("Cancelled selection.\n");
+											return 0;
+										}
+
+										/* connect points */
+										if((*frame)->armature.nPoints > 1) {											
+											Bone newBone = createBone(selectedPoint, otherSelectedPoint);
+											addBoneToArmature(&((*frame)->armature), newBone);
+
+											drawBone(newBone, CRT_FRAME, 255);
+											drawCtrlPoint(selectedPoint, CRT_FRAME, 255);
+
+											printf("(Info) Connected points successfully.\n");
+											printf("[DEBUG] Armature has now %d bones.\n", (*frame)->armature.nBones);
+											return 1;
+										}
 									}
 
-									Bone newBone = createBone(selectedPoint, otherSelectedPoint);
-									addBoneToArmature(&((*frame)->armature), newBone);
-
-									drawBone(newBone, CRT_FRAME, 255);
-									drawCtrlPoint(selectedPoint, CRT_FRAME, 255);
-
-									printf("(Info) Connected points successfully.\n");
-									printf("[DEBUG] Armature has now %d bones.\n", (*frame)->armature.nBones);
-									return 1;
-								}
-								else {
-									printf("(Info) No other point to connect with !\n");
-									return 0;
 								}
 
+								
 							}
 							else {
 								CtrlPoint new = createCtrlPoint("new point", x, y);
