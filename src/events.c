@@ -153,11 +153,12 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 						if (s->editMode) {
 							if (hasSelectedPoint(x, y, (*frame)->armature, &selectedPoint)) {
 								printf("[DEBUG] Clicked on a point\n");
-								drawPointSelection(selectedPoint); /* highlighting selected point */
-								MLV_actualise_window();
+
 								CtrlPoint otherSelectedPoint;
 
 								if((*frame)->armature.nPoints > 1) {
+									drawPointSelection(selectedPoint); /* highlighting selected point */
+									MLV_actualise_window();
 									/* waiting for another selection */
 									
 									MLV_wait_mouse(&x, &y);
