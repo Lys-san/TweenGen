@@ -111,7 +111,6 @@ int isContainedBone(Armature armature, Bone bone) {
 
 void addCtrlPointToArmature(Armature *armature, CtrlPoint p) {
 	if (isContained(*armature, p) < 0) {
-		printf("Adding a new point to the canvas.\n");
 		armature->points[armature->nPoints] = p;
 		armature->nPoints++;
 	}
@@ -119,7 +118,6 @@ void addCtrlPointToArmature(Armature *armature, CtrlPoint p) {
 
 void addBoneToArmature(Armature *armature, Bone b) {
 	/*if (!isContainedBone(*armature, b)) {*/
-		printf("HERE\n");
 		armature->bones[armature->nBones] = b;
 		armature->nBones++;
 	/*}*/

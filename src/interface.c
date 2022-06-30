@@ -57,7 +57,7 @@ void drawInterface(unsigned int windowWidth, unsigned int windowHeight) {
 	MLV_draw_text(
 		MARGIN_RATIO * windowWidth + 10,
 		windowHeight - 20,
-		"TweenGen v.0.1.1 - 2022 Lysandre Macke",
+		"TweenGen v.0.1.2 - 2022 Lysandre Macke",
 		TEXT_COLOR_2
 	);
 }
@@ -216,10 +216,7 @@ void drawBone(Bone b, FramePos framePos, Uint8 opacity) {
 
 void drawArmature(Armature a, FramePos framePos, Uint8 opacity) {
 	int i;
-	printf("[DEBUG] Starting drawing armature\n");
-	printf("[DEBUG] a.nbBones : %d\n", a.nBones);
 	for (i = 0; i < a.nBones; i++) {
-		printf("BONE\n");
 		drawBone(a.bones[i], framePos, opacity);
 	}
 

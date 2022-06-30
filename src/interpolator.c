@@ -40,6 +40,10 @@ Bone boneInterpol(Bone bone_1, Bone bone_2) {
 	p1 = linearInterpol(*bone_1.a, *bone_2.a);
 	p2 = linearInterpol(*bone_1.b, *bone_2.b);
 
+	printf("--generated points : \n");
+	printCtrlPoint(p1);
+	printCtrlPoint(p2);
+
 	if (dist(*bone_1.a, *bone_2.a) < dist(*bone_1.b, *bone_2.b)) {
 		base = p1;
 		mv = p2;
@@ -52,7 +56,6 @@ Bone boneInterpol(Bone bone_1, Bone bone_2) {
 
 	/* adjusting the interpolation of the moving point */
 	cosTheta = abs(mv.x - base.x)/((dist(base, mv)));
-	printf("----%d %d\n", mv.x, base.x);
 	printf("cos(theta) : %d / %f = %f\n", (mv.x - base.x), dist(base, mv), cosTheta);
 	printf("[DEBUG] BASE POINT : \n");
 	printCtrlPoint(base);
@@ -68,6 +71,11 @@ Bone boneInterpol(Bone bone_1, Bone bone_2) {
 
 	printCtrlPoint(genMvPoint);
 	Bone genBone = {&base, &genMvPoint};
+	printf("CHECK HERE\n");
+	printCtrlPoint(base);
+	printCtrlPoint(*genBone.a);
+	printCtrlPoint(genMvPoint);
+	printCtrlPoint(*genBone.b);
 	printf("[DEBUG] final length : %d\n", length(genBone));
 	return genBone;
 }
@@ -131,9 +139,17 @@ void interpolateSeqFromBones(FrameSeq *seq, Bone (*interpolFunction)(Bone, Bone)
 				(*seq)->armature.bones[i],
 				(*seq)->next->armature.bones[i]
 				);
+			printf("Adding generated bone to armature...\n");
 			addBoneToArmature(&(tmp->armature), genBone);
+			printf("Added successfully.\n");
 			addCtrlPointToArmature(&(tmp->armature), *genBone.a);
 			addCtrlPointToArmature(&(tmp->armature), *genBone.b);
+			printf("AND HERE TOO\n");
+			/* WTF (uupsie, accessing memory that wasn't malloc'd ?) */
+			printCtrlPoint(*genBone.a);
+			printCtrlPoint(*genBone.b);
+			/* --- */
+			printf("Added generated points.\n");
 
 			
 		}

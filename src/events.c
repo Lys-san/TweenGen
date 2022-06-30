@@ -76,19 +76,19 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 
 					/* NEW FRAME (for tests & debug) */
 					case MLV_KEYBOARD_n :
-						printf("Adding a new frame...\n");
+						printf("(INFO) Adding a new frame...\n");
 						FrameSeq new = createEmptyFrame();
 						insertFrameHere(new, frame);
 						drawFrame(*frame, windowWidth, windowHeight);
-						printf("New frame successfully added !\n");
+						printf("(INFO) New frame successfully added !\n");
 
 						return 1;
 
 					/* GENERATE INBETWEENS (interpolation) */
 					case MLV_KEYBOARD_SPACE :
-						printf("Generating inbetweens...\n");
+						printf("(INFO) Generating inbetweens...\n");
 						interpolateSeq(frame, &INTERPOL_FUNC);
-						printf("Inbetweeens generated !\n");
+						printf("(INFO) Inbetweeens generated !\n");
 						printFrameSeq(*frame);
 						drawFrame(*frame, windowWidth, windowHeight);
 						drawArmature((*frame)->armature, CRT_FRAME, 255);
@@ -97,9 +97,9 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 
 					/* GENERATE INBETWEENS from bones (interpolation) */
 					case MLV_KEYBOARD_b :
-						printf("Generating inbetweens...\n");
+						printf("(INFO) Generating inbetweens...\n");
 						interpolateSeqFromBones(frame, &boneInterpol);
-						printf("Inbetweeens generated !\n");
+						printf("(INFO) Inbetweeens generated !\n");
 						printFrameSeq(*frame);
 						drawFrame(*frame, windowWidth, windowHeight);
 						drawArmature((*frame)->armature, CRT_FRAME, 255);
@@ -107,9 +107,9 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 						return 1;
 					/* AVERAGE SEQUENCE */
 					case MLV_KEYBOARD_t :
-						printf("Generating inbetweens...\n");
+						printf("(INFO) Generating inbetweens...\n");
 						averageSeq(frame);
-						printf("Inbetweeens generated !\n");
+						printf("(INFO) Inbetweeens generated !\n");
 						printFrameSeq(*frame);
 						drawFrame(*frame, windowWidth, windowHeight);
 						drawArmature((*frame)->armature, CRT_FRAME, 255);

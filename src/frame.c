@@ -50,9 +50,6 @@ void addFrameToSequence(const char *fileName, FrameSeq *seq) {
 void insertFrameHere(FrameSeq newFrame, FrameSeq *seq) {
 	int initialIndex = (*seq)->index;
 
-	printf("[DEBUG] Current frame : %d\n", (*seq)->index);
-	printf("[DEBUG] Creating frame : %d\n", (*seq)->index + 1);
-
 	/* linking new frame with previous */
 	newFrame->index = (*seq)->index + 1;
 	newFrame->prev = *seq;
@@ -69,7 +66,6 @@ void insertFrameHere(FrameSeq newFrame, FrameSeq *seq) {
 
 		/* adjusting indexes */
 		while((*seq)->next != NULL) {
-			printf("[DEBUG] Adjusting 1 index...\n");
 			*seq = (*seq)->next;
 			(*seq)->index++;
 		}
@@ -77,7 +73,6 @@ void insertFrameHere(FrameSeq newFrame, FrameSeq *seq) {
 	}
 	/* adding at the end */
 	else {
-		printf("[DEBUG] Adding at the end of the sequence\n");
 		(*seq)->next = newFrame;
 		*seq = (*seq)->next; /* upadting the position */
 	}
@@ -85,12 +80,10 @@ void insertFrameHere(FrameSeq newFrame, FrameSeq *seq) {
 
 void goToFrame(int index, FrameSeq *seq) {
 	index = index > 0 ? index : 0; 
-	printf("-- Want to go to frame %d from frame %d\n", index, (*seq)->index);
 	/* going forward in the linked list */
 	while (index > (*seq)->index) {
 		if ((*seq)->next != NULL) {
 			*seq = (*seq)->next;
-			printf("-- Going forward to frame %d \n", (*seq)->index);
 		}
 		else {
 			/* fprintf(stderr, "Frame %d does not exist\n", index); */
@@ -102,7 +95,6 @@ void goToFrame(int index, FrameSeq *seq) {
 	while (index < (*seq)->index) {
 		if ((*seq)->prev != NULL) {
 			*seq = (*seq)->prev;
-			printf("-- Going backward to frame %d \n", (*seq)->index);
 		}
 
 		else {

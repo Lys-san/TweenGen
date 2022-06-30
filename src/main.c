@@ -21,6 +21,7 @@ int main(int argc, char * argv[]) {
 	char tmp[255];
 	char buffer[255];
 
+	printf("loading files/sample/frame_1.png...\n");
 	FrameSeq frames = loadFrame("files/sample/frame_1.png", 1);
 	resizeFrame(&frames, windowWidth, windowHeight);
 
