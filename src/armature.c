@@ -30,7 +30,7 @@ int areSamePoints(CtrlPoint p1, CtrlPoint p2) {
 	return 0;
 }
 
-Bone createBone(CtrlPoint a, CtrlPoint b) {
+Bone createBone(CtrlPoint *a, CtrlPoint *b) {
 	Bone newBone;
 	newBone.a = a;
 	newBone.b = b;
@@ -47,15 +47,15 @@ void printCtrlPoint(CtrlPoint cp) {
 }
 
 int areSameBones(Bone bone_1, Bone bone_2) {
-	if (areSamePoints(bone_1.a, bone_2.a) && areSamePoints(bone_1.b, bone_2.b))
+	if (areSamePoints(*bone_1.a, *bone_2.a) && areSamePoints(*bone_1.b, *bone_2.b))
 		return 0;
-	if (areSamePoints(bone_1.a, bone_2.b) && areSamePoints(bone_1.b, bone_2.a))
+	if (areSamePoints(*bone_1.a, *bone_2.b) && areSamePoints(*bone_1.b, *bone_2.a))
 		return 1;
 	return -1;
 }
 
 int length(Bone bone) {
-	return sqrt(SQUARE(bone.b.x - bone.a.x) + SQUARE(bone.b.y - bone.a.y));
+	return sqrt(SQUARE(bone.b->x - bone.a->x) + SQUARE(bone.b->y - bone.a->y));
 }
 
 float dist(CtrlPoint a, CtrlPoint b) {
@@ -111,6 +111,7 @@ int isContainedBone(Armature armature, Bone bone) {
 
 void addCtrlPointToArmature(Armature *armature, CtrlPoint p) {
 	if (isContained(*armature, p) < 0) {
+		printf("Adding a new point to the canvas.\n");
 		armature->points[armature->nPoints] = p;
 		armature->nPoints++;
 	}

@@ -210,7 +210,7 @@ void drawBone(Bone b, FramePos framePos, Uint8 opacity) {
 	lineColor = addOpacity(lineColor, opacity);
 
 	/* drawing the line */
-	MLV_draw_line(b.a.x, b.a.y, b.b.x, b.b.y, lineColor);
+	MLV_draw_line(b.a->x, b.a->y, b.b->x, b.b->y, lineColor);
 
 }
 
@@ -219,6 +219,7 @@ void drawArmature(Armature a, FramePos framePos, Uint8 opacity) {
 	printf("[DEBUG] Starting drawing armature\n");
 	printf("[DEBUG] a.nbBones : %d\n", a.nBones);
 	for (i = 0; i < a.nBones; i++) {
+		printf("BONE\n");
 		drawBone(a.bones[i], framePos, opacity);
 	}
 

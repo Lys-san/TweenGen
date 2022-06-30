@@ -21,8 +21,8 @@
 
 	/** A bone is a connexion between two control points. */
 	typedef struct {
-		CtrlPoint a;               /* first point */
-		CtrlPoint b;               /* secnd point */
+		CtrlPoint *a;               /* pointer to first point */
+		CtrlPoint *b;               /* pointer to secnd point */
 	} Bone;
 
 	/** An armature is a set of linked control points. */
@@ -45,7 +45,7 @@
 	int areSamePoints(CtrlPoint p1, CtrlPoint p2);
 
 	/** Creates and returns a bone formed with the given points. */
-	Bone createBone(CtrlPoint a, CtrlPoint b);
+	Bone createBone(CtrlPoint *a, CtrlPoint *b);
 
 	/** (DEBUG) Prints the informations about a given control point. */
 	void printCtrlPoint(CtrlPoint cp);

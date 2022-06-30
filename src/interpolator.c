@@ -37,10 +37,10 @@ Bone boneInterpol(Bone bone_1, Bone bone_2) {
 	printf("[DEBUG] lengths : %d %d %d\n", len1, len2, genLen);
 
 	/* getting informations based on the linear interpolation */
-	p1 = linearInterpol(bone_1.a, bone_2.a);
-	p2 = linearInterpol(bone_1.b, bone_2.b);
+	p1 = linearInterpol(*bone_1.a, *bone_2.a);
+	p2 = linearInterpol(*bone_1.b, *bone_2.b);
 
-	if (dist(bone_1.a, bone_2.a) < dist(bone_1.b, bone_2.b)) {
+	if (dist(*bone_1.a, *bone_2.a) < dist(*bone_1.b, *bone_2.b)) {
 		base = p1;
 		mv = p2;
 	}
@@ -67,7 +67,7 @@ Bone boneInterpol(Bone bone_1, Bone bone_2) {
 	CtrlPoint genMvPoint = createCtrlPoint("GenPoint", x, y);
 
 	printCtrlPoint(genMvPoint);
-	Bone genBone = {base, genMvPoint};
+	Bone genBone = {&base, &genMvPoint};
 	printf("[DEBUG] final length : %d\n", length(genBone));
 	return genBone;
 }
@@ -132,8 +132,8 @@ void interpolateSeqFromBones(FrameSeq *seq, Bone (*interpolFunction)(Bone, Bone)
 				(*seq)->next->armature.bones[i]
 				);
 			addBoneToArmature(&(tmp->armature), genBone);
-			addCtrlPointToArmature(&(tmp->armature), genBone.a);
-			addCtrlPointToArmature(&(tmp->armature), genBone.b);
+			addCtrlPointToArmature(&(tmp->armature), *genBone.a);
+			addCtrlPointToArmature(&(tmp->armature), *genBone.b);
 
 			
 		}

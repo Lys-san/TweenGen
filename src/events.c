@@ -185,7 +185,10 @@ int getAndApplyEvent(unsigned int windowWidth, unsigned int windowHeight, FrameS
 
 										/* connect points */
 										if((*frame)->armature.nPoints > 1) {											
-											Bone newBone = createBone(selectedPoint, otherSelectedPoint);
+											Bone newBone = createBone(
+												&((*frame)->armature.points[isContained((*frame)->armature, selectedPoint)]),
+												&((*frame)->armature.points[isContained((*frame)->armature, otherSelectedPoint)])
+											);
 											addBoneToArmature(&((*frame)->armature), newBone);
 
 											drawBone(newBone, CRT_FRAME, 255);
